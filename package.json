@@ -13,10 +13,8 @@
     "http-errors": "~1.6.2",
     "less-middleware": "~2.2.1",
     "morgan": "~1.9.0",
-    "phantasma": "^1.4.0",
     "phantom": "^6.0.3",
     "pug": "2.0.0-beta11",
-    "webpage": "^0.3.0",
-    "zombie": "^6.1.2"
+    "webpage": "^0.3.0"
   }
 }
