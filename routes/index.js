@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const config = require('../common/config');
 const baseUrl = 'http://oddsportal.com';
 const cp = require('child_process');
+const _ = require('underscore');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -59,6 +60,7 @@ router.post('/getmatch', function (req, res, next) {
         });
 
         const ua = await page.setting('userAgent', config.userAgent);
+        const scr = await page.setting('viewportSize', {width: 1024, height: 768});
         const status = await page.open(matchLink);
         const content = await page.property('content');
 
@@ -67,10 +69,12 @@ router.post('/getmatch', function (req, res, next) {
         let match = {
             title: $('div#col-content > h1').text(),
             pinnacle : {
-                odds: []
+                odds: [],
+                hintcode: ''
             },
             marathonbet : {
-                odds: []
+                odds: [],
+                hintcode: ''
             }
         };
 
@@ -80,14 +84,32 @@ router.post('/getmatch', function (req, res, next) {
             .find('a.name2')
             .each(function (index, element) {
                 if ((element.attribs.href).includes('pinnacle')) {
-                    $(element).parent().parent().parent().find('td.right.odds > div').each(function (i, e) {
+                    let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                    divS.each(function (i, e) {
                         match.pinnacle.odds.push($(e).text());
                     });
+                    match.pinnacle.odds.splice(1, 1);
+                    let min = _.indexOf(match.pinnacle.odds, _.min(match.pinnacle.odds));
+
+                    divS.splice(1, 1);
+                    console.dir(divS[0]);
+                    match.pinnacle.hintcode = divS[min].attribs.onmouseover.match(/\(([^)]+)\)/)[1].split(',')[2];
+
+                    page.sendEvent('click', divS[0].offsetLeft, divS[0].offsetTop, 'left');
+
                 }
                 if ((element.attribs.href).includes('marathonbet')) {
-                    $(element).parent().parent().parent().find('td.right.odds > div').each(function (i, e) {
+                    let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                    divS.each(function (i, e) {
                         match.marathonbet.odds.push($(e).text());
                     });
+
+                    match.marathonbet.odds.splice(1, 1);
+                    let min = _.indexOf(match.marathonbet.odds, _.min(match.marathonbet.odds));
+
+                    divS.splice(1, 1);
+                    match.marathonbet.hintcode = divS[min].attribs.onmouseover.match(/\(([^)]+)\)/)[1].split(',')[2];
+
                 }
             });
 
