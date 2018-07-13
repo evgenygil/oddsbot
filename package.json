@@ -13,12 +13,9 @@
     "http-errors": "~1.6.2",
     "less-middleware": "~2.2.1",
     "morgan": "~1.9.0",
-    "phantasma": "^1.4.0",
     "phantom": "^6.0.3",
     "pug": "2.0.0-beta11",
     "puppeteer": "^1.6.0",
-    "spooky": "^0.2.5",
-    "underscore": "^1.9.1",
-    "webpage": "^0.3.0"
+    "underscore": "^1.9.1"
   }
 }

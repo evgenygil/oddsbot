@@ -8,7 +8,7 @@ $('#get-matches').click(function (e) {
 
     $.ajax({
         type: 'GET',
-        url: '/loadallmatches',
+        url: '/loadallmatches2',
         success: function (data) {
             $('#responce-text').html(data);
             // $('#get-odds').show();
@@ -48,26 +48,30 @@ function getMatches() {
 
                 i.count++;
 
-                $('#matches-list')
-                    .append('<li>' + JSON.stringify(data) + '</li>');
+                // $('#matches-list')
+                //     .append('<li>' + JSON.stringify(data) + '</li>');
 
-                // let pinnacle = '',
-                //     marathonbet = '';
-                //
-                // if ((data.pinnacle.odds).length > 0) {
-                //     pinnacle = '<span><b>Pinnacle: </b>' + (data.pinnacle.odds).join(', ') + '</span>';
-                // }
-                //
-                // if ((data.marathonbet.odds).length > 0) {
-                //     marathonbet = '<span><b>Marathonbet: </b>' + (data.marathonbet.odds).join(', ') + '</span>';
-                // }
-                //
-                // if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0) {
-                //     console.log('There are no useful odds on link: ' + href);
-                // } else {
-                //     $('#matches-list')
-                //         .append('<li><a href="' + href + '" target="_blank"><h5>' + data.title + '</h5></a>' + pinnacle + '<span style="color: gray">&nbsp;/&nbsp;</span>' + marathonbet + '<hr></li>')
-                // }
+                let pinnacle = '',
+                    marathonbet = '';
+
+                if ((data.pinnacle.odds).length > 0) {
+                    pinnacle = '<span><b>Pinnacle: </b>' + (data.pinnacle.odds).join(', ') + '</span>';
+                }
+
+                if ((data.marathonbet.odds).length > 0) {
+                    marathonbet = '<span><b>Marathonbet: </b>' + (data.marathonbet.odds).join(', ') + '</span>';
+                }
+
+                if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0) {
+                    console.log('There are no useful odds on link: ' + href);
+                } else {
+                    $('#matches-list')
+                        .append('<li><div><a href="' + href + '" target="_blank"><h5>' + data.title + '</h5></a><div>' +
+                            '<div class="row" style="width: 500px;">' +
+                            '<div class="col">' + pinnacle + (data.pinnacle.blob ? data.pinnacle.blob : '') + '</div>' +
+                            '<div class="col">' + marathonbet + (data.marathonbet.blob ? data.marathonbet.blob : '') + '</div>' +
+                            '</div><hr></li>')
+                }
 
                 if (i >= links.length) {
 

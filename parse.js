@@ -7,13 +7,14 @@ const _ = require('underscore');
 const puppeteer = require('puppeteer');
 
 // let matchLink = req.body.link;
-let matchLink = 'http://www.oddsportal.com/soccer/world/club-friendly/san-carlos-guadalupe-xnsUg7zB/';
+let matchLink = 'http://www.oddsportal.com/soccer/world/club-friendly/admira-concordia-lAC2z3ft/';
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 
 (async () => {
     const browser = await puppeteer.launch({
-        args: [
-            '--proxy-server=46.101.167.43:80', // Or whatever the address is
-        ]
+        timeout: 0,
+        args: config.pupArgs
     });
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
@@ -21,32 +22,81 @@ let matchLink = 'http://www.oddsportal.com/soccer/world/club-friendly/san-carlos
     await page.goto(matchLink);
     let content = await page.evaluate(() => document.body.innerHTML);
 
-    // let $ = await cheerio.load(content);
+    let $ = await cheerio.load(content);
 
-    // let k = $('div#odds-data-table');
+    let match = await getMatchData($);
 
-    let k = await page.evaluate(() => document.querySelector('a.name[href="/bookmaker/marathonbet/link/"]').closest('td').closest('tr'));
+    if (match.pinnacle.hint) {
+        console.log('pinnacle: '+ match.pinnacle.hint);
+        await page.hover('div[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log(e.stack));
+        await page.waitFor(500);
+        await page.screenshot({path: '1.png'});
+        match.pinnacle.blob = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
+    }
 
-    let $ = await cheerio.load(k);
-
-    // let k = $('div#odds-data-table')
-    //     .find('a.name[href="/bookmaker/marathonbet/link/"]');
-
-    // const data = await page.evaluate(() => {
-    //     const tds = Array.from(document.querySelector('a.name[href="/bookmaker/marathonbet/link/"]').closest('td').closest('tr td').innerHTML)
-    //     return tds.map(td => td.textContent)
-    // });
-    // let divs = await page.evaluate(() => document.querySelector('div#odds-data-table').querySelector('tbody').innerHTML);
-
-    // await page.hover("div[onmouseover=\"page.hist(this,'P-0.00-0-0','355svxv464x0x7omg8',381,event,0,1)\"]");
-    // await page.screenshot({path: 'example.png'});
-
-    // let content = await page.evaluate(() => document.querySelector('#tooltiptext').outerHTML);
-
-    $('body').find('td').each(function (index, element) {
-        console.log(element);
-    });
+    if (match.marathonbet.hint) {
+        console.log('marathonbet: '+ match.marathonbet.hint);
+        await page.hover('div[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log(e.stack));
+        await page.waitFor(1000);
+        await page.screenshot({path: '2.png'});
+        match.marathonbet.blob = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
+    }
 
     await browser.close();
 
+    console.log(match);
+
 })();
+
+function getMatchData($) {
+    return new Promise(function (resolve, reject) {
+
+        if ($) {
+            let match = {
+                title: $('div#col-content > h1').text(),
+                pinnacle: {
+                    odds: [],
+                },
+                marathonbet: {
+                    odds: [],
+                }
+            };
+
+            $('div#odds-data-table')
+                .find('table.table-main.detail-odds.sortable')
+                .find('tbody')
+                .find('a.name2')
+                .each(function (index, element) {
+                    if ((element.attribs.href).includes('pinnacle')) {
+                        let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                        divS.each(function (i, e) {
+                            match.pinnacle.odds.push($(e).text());
+                        });
+                        match.pinnacle.odds.splice(1, 1);
+                        let min = _.indexOf(match.pinnacle.odds, _.min(match.pinnacle.odds));
+
+                        divS.splice(1, 1);
+                        match.pinnacle.hint = divS[min].attribs.onmouseover;
+
+                    }
+                    if ((element.attribs.href).includes('marathonbet')) {
+                        let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                        divS.each(function (i, e) {
+                            match.marathonbet.odds.push($(e).text());
+                        });
+
+                        match.marathonbet.odds.splice(1, 1);
+                        let min = _.indexOf(match.marathonbet.odds, _.min(match.marathonbet.odds));
+
+                        divS.splice(1, 1);
+                        match.marathonbet.hint = divS[min].attribs.onmouseover;
+
+                    }
+                });
+            resolve(match)
+        }
+        else {
+            reject('error')
+        }
+    });
+}
