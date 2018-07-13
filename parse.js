@@ -3,44 +3,50 @@ const cheerio = require('cheerio');
 const config = require('./common/config');
 const baseUrl = 'http://oddsportal.com';
 const cp = require('child_process');
+const _ = require('underscore');
+const puppeteer = require('puppeteer');
 
+// let matchLink = req.body.link;
+let matchLink = 'http://www.oddsportal.com/soccer/world/club-friendly/san-carlos-guadalupe-xnsUg7zB/';
 
-(async function() {
-    console.log('Wait please nigga... Do not rush!');
+(async () => {
+    const browser = await puppeteer.launch({
+        args: [
+            '--proxy-server=46.101.167.43:80', // Or whatever the address is
+        ]
+    });
+    const page = await browser.newPage();
+    await browser.userAgent(config.userAgent);
+    await page.setViewport({width: 1440, height: 960});
+    await page.goto(matchLink);
+    let content = await page.evaluate(() => document.body.innerHTML);
 
-    const instance = await phantom.create(config.phantomParams);
-    const page = await instance.createPage();
-    await page.on('onResourceRequested', function(requestData) {
-        // console.info('Requesting', requestData.url);
+    // let $ = await cheerio.load(content);
+
+    // let k = $('div#odds-data-table');
+
+    let k = await page.evaluate(() => document.querySelector('a.name[href="/bookmaker/marathonbet/link/"]').closest('td').closest('tr'));
+
+    let $ = await cheerio.load(k);
+
+    // let k = $('div#odds-data-table')
+    //     .find('a.name[href="/bookmaker/marathonbet/link/"]');
+
+    // const data = await page.evaluate(() => {
+    //     const tds = Array.from(document.querySelector('a.name[href="/bookmaker/marathonbet/link/"]').closest('td').closest('tr td').innerHTML)
+    //     return tds.map(td => td.textContent)
+    // });
+    // let divs = await page.evaluate(() => document.querySelector('div#odds-data-table').querySelector('tbody').innerHTML);
+
+    // await page.hover("div[onmouseover=\"page.hist(this,'P-0.00-0-0','355svxv464x0x7omg8',381,event,0,1)\"]");
+    // await page.screenshot({path: 'example.png'});
+
+    // let content = await page.evaluate(() => document.querySelector('#tooltiptext').outerHTML);
+
+    $('body').find('td').each(function (index, element) {
+        console.log(element);
     });
 
-    const ua = await page.setting('userAgent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.256');
-    const status = await page.open('http://oddsportal.com/matches/soccer/');
-    const content = await page.property('content');
+    await browser.close();
 
-    let $ = cheerio.load(content);
-    let linksArr = [];
-
-    $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
-        let href = element.attribs.href;
-        if (href.includes('/soccer/')) {
-            linksArr.push(href);
-        }
-    });
-
-    console.log(linksArr);
-
-    for (let i = 0; i < 3; i++) {
-        setTimeout(function () {
-            let child = cp.fork('matchParser.js', [baseUrl + linksArr[i]], {silent: true});
-            child.stderr.on('data', function(data) {
-                console.log('stdout: ' + data);
-            });
-            child.on('message', function(msg) {
-                console.log(require('util').inspect(msg));
-            });
-        }, 1000 * i);
-    }
-
-    await instance.exit();
 })();

@@ -42,7 +42,7 @@ function getMatches() {
 
         $.ajax({
             type: 'POST',
-            url: '/getmatch',
+            url: '/getmatch2',
             data: {link: href},
             success: function (data) {
 

@@ -5,6 +5,7 @@ const config = require('../common/config');
 const baseUrl = 'http://oddsportal.com';
 const cp = require('child_process');
 const _ = require('underscore');
+const Spooky = require('spooky');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -117,6 +118,45 @@ router.post('/getmatch', function (req, res, next) {
         await res.send(match);
 
     })();
+
+});
+
+router.post('/getmatch2', function (req, res, next) {
+
+    let matchLink = req.body.link;
+
+    let spooky = new Spooky({
+        child: {
+            transport: 'http'
+        },
+        casper: {
+            logLevel: 'debug',
+            verbose: true
+        }
+    }, function (err) {
+        if (err) {
+            e = new Error('Failed to initialize SpookyJS');
+            e.details = err;
+            throw e;
+        }
+
+        spooky.start(matchLink);
+        spooky.then(function () {
+            this.emit('hello', 'Hello, from ' + this.evaluate(function () {
+                return document.title;
+            }));
+        });
+        spooky.run();
+    });
+
+    spooky.on('error', function (e, stack) {
+        console.error(e);
+
+        if (stack) {
+            console.log(stack);
+        }
+    });
+
 
 });
 
