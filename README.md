@@ -1,0 +1,1 @@
+`pm2 start process.json` (from root folder, the go to 127.0.0.1 and press get matches)
