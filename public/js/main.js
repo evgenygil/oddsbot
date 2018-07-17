@@ -8,7 +8,7 @@ $('#get-matches').click(function (e) {
 
     $.ajax({
         type: 'GET',
-        url: '/loadallmatches2',
+        url: '/loadallmatches',
         success: function (data) {
             $('#responce-text').html(data);
             // $('#get-odds').show();
@@ -28,62 +28,73 @@ function getMatches() {
 
     let links = $('#links-list').children();
 
-    console.log(links.length);
+    console.log('Total links to work: ' + links.length);
 
-    let i = {
-        count: 0
-    };
-
-    links.each(function () {
+    links.each(function (index) {
 
         let added = ($('#matches-list').children()).length;
 
         let href = $(this).text();
 
-        $.ajax({
-            type: 'POST',
-            url: '/getmatch2',
-            data: {link: href},
-            success: function (data) {
+        setTimeout(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/getmatch',
+                data: {link: href},
+                success: function (data) {
 
-                i.count++;
+                    // $('#matches-list')
+                    //     .append('<li>' + JSON.stringify(data) + '</li>');
 
-                // $('#matches-list')
-                //     .append('<li>' + JSON.stringify(data) + '</li>');
+                    let pinnacle = '',
+                        marathonbet = '',
+                        xbet = '';
 
-                let pinnacle = '',
-                    marathonbet = '';
+                    if (data.pinnacle) {
 
-                if ((data.pinnacle.odds).length > 0) {
-                    pinnacle = '<span><b>Pinnacle: </b>' + (data.pinnacle.odds).join(', ') + '</span>';
+                        if ((data.pinnacle.odds).length > 0) {
+                            pinnacle = '<span><b>Pinnacle: </b>' + (data.pinnacle.odds).join(', ') + '</span>';
+                        }
+
+                        if ((data.marathonbet.odds).length > 0) {
+                            marathonbet = '<span><b>Marathonbet: </b>' + (data.marathonbet.odds).join(', ') + '</span>';
+                        }
+
+                        if ((data.xbet.odds).length > 0) {
+                            xbet = '<span><b>1xbet: </b>' + (data.xbet.odds).join(', ') + '</span>';
+                        }
+
+                        if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0) {
+                            console.log('There are no useful odds on link: ' + href);
+                        } else {
+
+                            $('#matches-list')
+                                .append('<li><div><a href="' + href + '" target="_blank"><h5>' + data.title + '</h5></a><p>' + data.date + '</p><div>' +
+                                    '<div class="row" style="width: 800px;">' +
+                                    '<div class="col">' + pinnacle + '<br>' + (data.pinnacle.blob ? JSON.stringify(data.pinnacle.blob) : '') + '</div>' +
+                                    '<div class="col">' + marathonbet + '<br>' + (data.marathonbet.blob ? JSON.stringify(data.marathonbet.blob) : '') + '</div>' +
+                                    '<div class="col">' + xbet + '<br>' + (data.xbet.blob ? JSON.stringify(data.xbet.blob) : '') + '</div>' +
+                                    '</div><p>Delta pinnacle = ' + data.pinnacle.delta + '</p>' +
+                                    '<p>Delta marathonbet = ' + data.marathonbet.delta + '</p>' +
+                                    '<p>Delta xbet = ' + data.xbet.delta + '</p>' +
+                                    '<hr></li>')
+                        }
+
+                        if (i >= links.length) {
+
+                            $('#loading-img').fadeOut();
+                            $('#get-matches').prop('disabled', false);
+
+                        }
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
                 }
+            });
+        }, 1000 * index);
 
-                if ((data.marathonbet.odds).length > 0) {
-                    marathonbet = '<span><b>Marathonbet: </b>' + (data.marathonbet.odds).join(', ') + '</span>';
-                }
 
-                if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0) {
-                    console.log('There are no useful odds on link: ' + href);
-                } else {
-                    $('#matches-list')
-                        .append('<li><div><a href="' + href + '" target="_blank"><h5>' + data.title + '</h5></a><div>' +
-                            '<div class="row" style="width: 500px;">' +
-                            '<div class="col">' + pinnacle + (data.pinnacle.blob ? data.pinnacle.blob : '') + '</div>' +
-                            '<div class="col">' + marathonbet + (data.marathonbet.blob ? data.marathonbet.blob : '') + '</div>' +
-                            '</div><hr></li>')
-                }
-
-                if (i >= links.length) {
-
-                    $('#loading-img').fadeOut();
-                    $('#get-matches').prop('disabled', false);
-
-                }
-
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
     });
 }
