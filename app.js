@@ -1,11 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var lessMiddleware = require('less-middleware');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const lessMiddleware = require('less-middleware');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./common/db');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
+const monitorRouter = require('./routes/monitor');
+const logsRouter = require('./routes/logs');
+
+mongoose.connect(config.database);
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', function () {
+    console.log('Connected to MongoDB');
+});
+
+// Check for DB errors
+db.on('error', function (err) {
+    console.log(err);
+});
+
 
 var app = express();
 
@@ -21,6 +39,8 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/monitor', monitorRouter);
+app.use('/logs', logsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

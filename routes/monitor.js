@@ -4,7 +4,7 @@ const parser = require('../common/parser');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: '<oddsbot>'});
+    res.render('monitor/index', {title: 'Online monitor'});
 });
 
 router.get('/loadallmatches', function (req, res, next) {
@@ -16,8 +16,6 @@ router.get('/loadallmatches', function (req, res, next) {
         res.send(matches);
 
     })();
-
-
 
 });
 

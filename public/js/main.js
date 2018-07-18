@@ -1,5 +1,28 @@
-$('#get-matches').click(function (e) {
+// $('#get-matches').click(function (e) {
+//
+//     let search = $('#init-text').val();
+//
+//     $('#get-matches').prop('disabled', true);
+//
+//     $('#loading-img').fadeIn();
+//
+//     $.ajax({
+//         type: 'GET',
+//         url: '/monitor/loadallmatches',
+//         success: function (data) {
+//             $('#responce-text').html(data);
+//             // $('#get-odds').show();
+//             // $('#get-matches').fadeOut();
+//             getMatches();
+//         },
+//         error: function (err) {
+//             console.log(err);
+//         }
+//     });
+//
+// });
 
+function refreshMatches() {
     let search = $('#init-text').val();
 
     $('#get-matches').prop('disabled', true);
@@ -8,7 +31,7 @@ $('#get-matches').click(function (e) {
 
     $.ajax({
         type: 'GET',
-        url: '/loadallmatches',
+        url: '/monitor/loadallmatches',
         success: function (data) {
             $('#responce-text').html(data);
             // $('#get-odds').show();
@@ -19,8 +42,7 @@ $('#get-matches').click(function (e) {
             console.log(err);
         }
     });
-
-});
+}
 
 function getMatches() {
 
@@ -39,7 +61,7 @@ function getMatches() {
         setTimeout(function () {
             $.ajax({
                 type: 'POST',
-                url: '/getmatch',
+                url: '/monitor/getmatch',
                 data: {link: href},
                 success: function (data) {
 
@@ -98,3 +120,9 @@ function getMatches() {
 
     });
 }
+
+refreshMatches();
+
+setInterval(function () {
+    refreshMatches();
+}, 3600000);

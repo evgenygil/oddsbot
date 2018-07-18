@@ -40,7 +40,7 @@ async function parseMatches(type = 'json') {
 
 }
 
-async function parseMatch(matchLink, type = 'json') {
+async function parseMatch(matchLink, type = 'json', log = false) {
 
     const browser = await puppeteer.launch({
         timeout: 0,
@@ -56,24 +56,26 @@ async function parseMatch(matchLink, type = 'json') {
 
     let match = await getMatchData($);
 
-    if (match.pinnacle.odds.length > 0) {
+    let timeInterval = (log) ? 1800 : 10800;
+
+    if (match.pinnacle.odds.length > 0 && (Date.parse(match.date) - (Date.now()) < timeInterval)) {
 
         if (match.pinnacle.hint) {
             await page.hover('div[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log(e.stack));
-            await page.waitFor(200);
+            await page.waitFor(300);
             let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
             match.pinnacle.blob = await getJsonFromHtml(pinacle);
         }
 
         if (match.marathonbet.hint) {
             await page.hover('div[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log(e.stack));
-            await page.waitFor(500);
+            await page.waitFor(600);
             let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
             match.marathonbet.blob = await getJsonFromHtml(marathonbet);
         }
         if (match.xbet.hint) {
             await page.hover('div[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log(e.stack));
-            await page.waitFor(800);
+            await page.waitFor(900);
             let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
             match.xbet.blob = await getJsonFromHtml(xbet);
         }
@@ -172,7 +174,13 @@ function getMatchData($) {
                         let min = _.indexOf(match.pinnacle.odds, _.min(match.pinnacle.odds));
 
                         divS.splice(1, 1);
-                        match.pinnacle.hint = divS[min].attribs.onmouseover;
+                        try {
+                            match.pinnacle.hint = divS[min].attribs.onmouseover;
+                        } catch (e) {
+                            console.log(e.stack);
+                            console.log('Error in hint: ' + divS);
+                            console.log('Element: ' + element);
+                        }
                     }
                     if ((element.attribs.href).includes('marathonbet')) {
                         let divS = $(element).parent().parent().parent().find('td.right.odds > div');
@@ -184,7 +192,14 @@ function getMatchData($) {
                         let min = _.indexOf(match.marathonbet.odds, _.min(match.marathonbet.odds));
 
                         divS.splice(1, 1);
-                        match.marathonbet.hint = divS[min].attribs.onmouseover;
+                        try {
+                            match.marathonbet.hint = divS[min].attribs.onmouseover;
+                        } catch (e) {
+                            console.log(e.stack);
+                            console.log('Error in hint ' + divS);
+                            console.log('Element: ' + element);
+
+                        }
                     }
                     if ((element.attribs.href).includes('1xbet')) {
                         let divS = $(element).parent().parent().parent().find('td.right.odds > div');
@@ -196,7 +211,14 @@ function getMatchData($) {
                         let min = _.indexOf(match.xbet.odds, _.min(match.xbet.odds));
 
                         divS.splice(1, 1);
-                        match.xbet.hint = divS[min].attribs.onmouseover;
+                        try {
+                            match.xbet.hint = divS[min].attribs.onmouseover;
+                        } catch (e) {
+                            console.log(e.stack);
+                            console.log('Error in hint ' + divS);
+                            console.log('Element: ' + element);
+
+                        }
                     }
                 });
             resolve(match)
@@ -208,6 +230,7 @@ function getMatchData($) {
 }
 
 function getJsonFromHtml(data) {
+
     return new Promise(function (resolve, reject) {
 
         if (data) {
@@ -221,22 +244,30 @@ function getJsonFromHtml(data) {
                 items: []
             };
 
-            let maxIncrement = data.length-3;
+            let maxIncrement = data.length - 3;
 
             for (let i = 0; i < maxIncrement; i++) {
 
                 let val = html2json(data[i]);
 
-                let obj = {
-                    date: val.child[0].text.trim().replace(',', ' ' + (new Date()).getFullYear() + ','),
-                    val: val.child[1].child[0].text,
-                    inc_dec: val.child[3].child[0].text
-                };
+                try {
+                    let obj = {
+                        date: val.child[0].text.trim().replace(',', ' ' + (new Date()).getFullYear() + ','),
+                        val: val.child[1].child[0].text || val.child[1].text,
+                        inc_dec: (val.child[3] !== undefined) ? val.child[3].child[0].text : 0
+                    };
 
-                blob.items.push(obj);
+                    blob.items.push(obj);
+
+                } catch (e) {
+                    console.log(e.stack);
+                    console.log('Error in obj parsing. Broken blob: ' + JSON.stringify(val));
+                }
+
+
             }
 
-            let odds = html2json(data[data.length-1]);
+            let odds = html2json(data[data.length - 1]);
 
             blob.openOdds = {
                 date: odds.child[0].text.trim().replace(',', ' ' + (new Date()).getFullYear() + ','),
@@ -248,7 +279,9 @@ function getJsonFromHtml(data) {
         else {
             reject('error')
         }
+
     });
+
 }
 
 module.exports = {
