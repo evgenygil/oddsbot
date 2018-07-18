@@ -38,9 +38,6 @@ router.post('/getmatch', function (req, res, next) {
             let varDate = Date.parse(match.date);
             let now = new Date();
 
-            console.log('Current date ' + now);
-            console.log('Match date ' + varDate);
-
             if ((delta_pin >= 0.09 || delta_xbet >=0.9 || delta_mar >= 0.9) && ((varDate - now) < 10800) && (varDate > now)) {
                 match.pinnacle.delta = Math.round(delta_pin * 100) / 100;
                 match.xbet.delta = Math.round(delta_xbet * 100) / 100;

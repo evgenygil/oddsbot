@@ -68,41 +68,69 @@ function getMatches() {
                     // $('#matches-list')
                     //     .append('<li>' + JSON.stringify(data) + '</li>');
 
-                    let pinnacle = '',
-                        marathonbet = '',
-                        xbet = '';
+                    let pinnacleBlob = '',
+                        marathonBlob = '',
+                        xbetBlob = '';
 
                     if (data.pinnacle) {
 
                         if ((data.pinnacle.odds).length > 0) {
-                            pinnacle = '<span><b>Pinnacle: </b>' + (data.pinnacle.odds).join(', ') + '</span>';
+                            if (data.pinnacle.blob) {
+
+                                pinnacleBlob = `<h4><b>Pinnacle</b></h4><p>Odds: ${data.pinnacle.odds} </p>`;
+
+                                data.pinnacle.blob.items.forEach(function (e) {
+                                   pinnacleBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+                                });
+
+                                pinnacleBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.pinnacle.blob.openOdds.date}</span><span>${data.pinnacle.blob.openOdds.val}</span></div>`;
+
+                            }
                         }
 
                         if ((data.marathonbet.odds).length > 0) {
-                            marathonbet = '<span><b>Marathonbet: </b>' + (data.marathonbet.odds).join(', ') + '</span>';
+                            if (data.marathonbet.blob) {
+                                marathonBlob = `<h4><b>Marathonbet</b></h4><p>Odds: ${data.marathonbet.odds} </p>`;
+
+                                data.marathonbet.blob.items.forEach(function (e) {
+                                    marathonBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+                                });
+
+                                marathonBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.marathonbet.blob.openOdds.date}</span><span>${data.marathonbet.blob.openOdds.val}</span></div>`;
+
+                            }
                         }
 
                         if ((data.xbet.odds).length > 0) {
-                            xbet = '<span><b>1xbet: </b>' + (data.xbet.odds).join(', ') + '</span>';
+                            if (data.xbet.blob) {
+                                xbetBlob = `<h4><b>1Xbet</b></h4><p>Odds: ${data.xbet.odds} </p>`;
+
+                                data.xbet.blob.items.forEach(function (e) {
+                                    xbetBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+                                });
+
+                                xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span><span>${data.xbet.blob.openOdds.val}</span></div>`;
+
+                            }
                         }
 
-                        if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0) {
+                        if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0 && (data.xbet.odds).length === 0) {
                             console.log('There are no useful odds on link: ' + href);
                         } else {
 
                             $('#matches-list')
-                                .append('<li><div><a href="' + href + '" target="_blank"><h5>' + data.title + '</h5></a><p>' + data.date + '</p><div>' +
-                                    '<div class="row" style="width: 800px;">' +
-                                    '<div class="col">' + pinnacle + '<br>' + (data.pinnacle.blob ? JSON.stringify(data.pinnacle.blob) : '') + '</div>' +
-                                    '<div class="col">' + marathonbet + '<br>' + (data.marathonbet.blob ? JSON.stringify(data.marathonbet.blob) : '') + '</div>' +
-                                    '<div class="col">' + xbet + '<br>' + (data.xbet.blob ? JSON.stringify(data.xbet.blob) : '') + '</div>' +
-                                    '</div><p>Delta pinnacle = ' + data.pinnacle.delta + '</p>' +
-                                    '<p>Delta marathonbet = ' + data.marathonbet.delta + '</p>' +
-                                    '<p>Delta xbet = ' + data.xbet.delta + '</p>' +
+                                .append('<li><div><a href="' + href + '" target="_blank"><h3>' + data.title + '</h3></a><p>' + data.date + '</p><div>' +
+                                    '<div class="row" style="max-width: 860px;">' +
+                                    '<div class="col-lg-4">' + pinnacleBlob + '</div>' +
+                                    '<div class="col-lg-4">' + xbetBlob + '</div>' +
+                                    '<div class="col-lg-4">' + marathonBlob + '</div>' +
+                                    '</div><span>Delta pinnacle = ' + data.pinnacle.delta + '</span>, ' +
+                                    '<span>Delta marathonbet = ' + data.marathonbet.delta + '</span>, ' +
+                                    '<span>Delta xbet = ' + data.xbet.delta + '</span>' +
                                     '<hr></li>')
                         }
 
-                        if (i >= links.length) {
+                        if (index >= links.length) {
 
                             $('#loading-img').fadeOut();
                             $('#get-matches').prop('disabled', false);
@@ -125,4 +153,4 @@ refreshMatches();
 
 setInterval(function () {
     refreshMatches();
-}, 3600000);
+}, 7200000);

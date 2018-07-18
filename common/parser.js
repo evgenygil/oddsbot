@@ -179,7 +179,7 @@ function getMatchData($) {
                         } catch (e) {
                             console.log(e.stack);
                             console.log('Error in hint: ' + divS);
-                            console.log('Element: ' + element);
+                            console.log('Element: ' + element.toString());
                         }
                     }
                     if ((element.attribs.href).includes('marathonbet')) {
@@ -197,7 +197,7 @@ function getMatchData($) {
                         } catch (e) {
                             console.log(e.stack);
                             console.log('Error in hint ' + divS);
-                            console.log('Element: ' + element);
+                            console.log('Element: ' + element.toString());
 
                         }
                     }
@@ -216,7 +216,7 @@ function getMatchData($) {
                         } catch (e) {
                             console.log(e.stack);
                             console.log('Error in hint ' + divS);
-                            console.log('Element: ' + element);
+                            console.log('Element: ' + element.toString());
 
                         }
                     }

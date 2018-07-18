@@ -3,7 +3,7 @@ extends ../layout
 block content
         h2 Matches log
         div.row
-            div.col-lg-8
+            div.col-lg-10
                 div
                     span Pages: &nbsp;
                     if (page_id > pagesarr[0])
@@ -30,54 +30,54 @@ block content
                         h3: b #{log.title}
                         p Match starts: #{log.date}
                         div.row
-                        div.col-lg-4
-                            h4
-                                b Pinnacle
-                            p Odds: #{log.pinnacle.odds}
+                            div.col-lg-4
+                                h4
+                                    b Pinnacle
+                                p Odds: #{log.pinnacle.odds}
 
-                            if (log.pinnacle.blob)
-                                each item in log.pinnacle.blob.items
-                                    div
-                                        span #{item.date} /
-                                        span &nbsp;#{item.val} /
-                                        span &nbsp;#{item.inc_dec}
-                                div.margin-top-20.margin-bottom-10
-                                    span
-                                        b OpenOdds:
-                                    span #{log.pinnacle.blob.openOdds.date}
-                                    span #{log.pinnacle.blob.openOdds.val}
-                        div.col-lg-4
-                            h4
-                                b Maranthonbet
-                            p Odds: #{log.marathonbet.odds}
-
-                            if (log.marathonbet.blob)
-                                each item in log.marathonbet.blob.items
-                                    div
-                                        span #{item.date} /
+                                if (log.pinnacle.blob)
+                                    each item in log.pinnacle.blob.items
+                                        div
+                                            span #{item.date} /
                                             span &nbsp;#{item.val} /
                                             span &nbsp;#{item.inc_dec}
-                                div.margin-top-20.margin-bottom-10
-                                    span
-                                        b OpenOdds:
-                                    span #{log.marathonbet.blob.openOdds.date}
-                                    span #{log.marathonbet.blob.openOdds.val}
-                        div.col-lg-4
-                            h4
-                                b 1Xbet
-                            p Odds: #{log.xbet.odds}
+                                    div.margin-top-20.margin-bottom-10
+                                        span
+                                            b OpenOdds:
+                                        span #{log.pinnacle.blob.openOdds.date}
+                                        span #{log.pinnacle.blob.openOdds.val}
+                            div.col-lg-4
+                                h4
+                                    b Maranthonbet
+                                p Odds: #{log.marathonbet.odds}
 
-                            if (log.xbet.blob)
-                                each item in log.xbet.blob.items
-                                    div
-                                        span #{item.date} /
-                                            span &nbsp;#{item.val} /
-                                            span &nbsp;#{item.inc_dec}
-                                div.margin-top-20.margin-bottom-10
-                                    span
-                                        b OpenOdds:
-                                    span #{log.xbet.blob.openOdds.date}
-                                    span #{log.xbet.blob.openOdds.val}
+                                if (log.marathonbet.blob)
+                                    each item in log.marathonbet.blob.items
+                                        div
+                                            span #{item.date} /
+                                                span &nbsp;#{item.val} /
+                                                span &nbsp;#{item.inc_dec}
+                                    div.margin-top-20.margin-bottom-10
+                                        span
+                                            b OpenOdds:
+                                        span #{log.marathonbet.blob.openOdds.date}
+                                        span #{log.marathonbet.blob.openOdds.val}
+                            div.col-lg-4
+                                h4
+                                    b 1Xbet
+                                p Odds: #{log.xbet.odds}
+
+                                if (log.xbet.blob)
+                                    each item in log.xbet.blob.items
+                                        div
+                                            span #{item.date} /
+                                                span &nbsp;#{item.val} /
+                                                span &nbsp;#{item.inc_dec}
+                                    div.margin-top-20.margin-bottom-10
+                                        span
+                                            b OpenOdds:
+                                        span #{log.xbet.blob.openOdds.date}
+                                        span #{log.xbet.blob.openOdds.val}
 
                         p Created at #{log.createdAt}
                         //if (user)
@@ -112,4 +112,4 @@ block content
                         a(href='/logs/all/page/' + (parseInt(page_id) + 1)): span.hint >
                     else
                         span.hint(style='color:lightgray') >
-            div.col-lg-4
+            div.col-lg-2
