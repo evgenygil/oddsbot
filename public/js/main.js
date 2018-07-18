@@ -23,7 +23,6 @@
 // });
 
 function refreshMatches() {
-    let search = $('#init-text').val();
 
     $('#get-matches').prop('disabled', true);
 
@@ -52,22 +51,30 @@ function getMatches() {
 
     console.log('Total links to work: ' + links.length);
 
-    links.each(function (index) {
+    let i = 0;
 
-        let added = ($('#matches-list').children()).length;
+    let t = 0;
 
-        let href = $(this).text();
+    let mySecondsTimer = setInterval(myTimer, 1000);
 
-        setTimeout(function () {
+    function myTimer() {
+        $('#seconds-work').text(t + ' s.');
+        t++;
+    }
+
+    function loadNext() {
+
+        $('#remaining-items').text(links.length - i);
+
+        if (i < links.length) {
+
+            let href = $(links[i]).text();
+
             $.ajax({
                 type: 'POST',
                 url: '/monitor/getmatch',
                 data: {link: href},
-                success: function (data) {
-
-                    // $('#matches-list')
-                    //     .append('<li>' + JSON.stringify(data) + '</li>');
-
+                success:function(data){
                     let pinnacleBlob = '',
                         marathonBlob = '',
                         xbetBlob = '';
@@ -80,7 +87,7 @@ function getMatches() {
                                 pinnacleBlob = `<h4><b>Pinnacle</b></h4><p>Odds: ${data.pinnacle.odds} </p>`;
 
                                 data.pinnacle.blob.items.forEach(function (e) {
-                                   pinnacleBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+                                    pinnacleBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
                                 });
 
                                 pinnacleBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.pinnacle.blob.openOdds.date}</span><span>${data.pinnacle.blob.openOdds.val}</span></div>`;
@@ -130,23 +137,121 @@ function getMatches() {
                                     '<hr></li>')
                         }
 
-                        if (index >= links.length) {
-
-                            $('#loading-img').fadeOut();
-                            $('#get-matches').prop('disabled', false);
-
-                        }
                     }
-
+                    loadNext();
                 },
-                error: function (err) {
-                    console.log(err);
-                }
+                error: function(){
+                    loadNext();
+                },
+                timeout: 10000
             });
-        }, 1000 * index);
 
+            i++;
+            if (i >= links.length) {
 
-    });
+                $('#loading-img').fadeOut();
+                $('#get-matches').prop('disabled', false);
+                clearInterval(mySecondsTimer);
+
+            }
+        }
+    }
+
+    loadNext();
+
+    // links.each(function (index) {
+    //
+    //     let added = ($('#matches-list').children()).length;
+    //
+    //     let href = $(this).text();
+    //
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/monitor/getmatch',
+    //             data: {link: href},
+    //             success: function (data) {
+    //
+    //                 // $('#matches-list')
+    //                 //     .append('<li>' + JSON.stringify(data) + '</li>');
+    //
+    //                 let pinnacleBlob = '',
+    //                     marathonBlob = '',
+    //                     xbetBlob = '';
+    //
+    //                 if (data.pinnacle) {
+    //
+    //                     if ((data.pinnacle.odds).length > 0) {
+    //                         if (data.pinnacle.blob) {
+    //
+    //                             pinnacleBlob = `<h4><b>Pinnacle</b></h4><p>Odds: ${data.pinnacle.odds} </p>`;
+    //
+    //                             data.pinnacle.blob.items.forEach(function (e) {
+    //                                pinnacleBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+    //                             });
+    //
+    //                             pinnacleBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.pinnacle.blob.openOdds.date}</span><span>${data.pinnacle.blob.openOdds.val}</span></div>`;
+    //
+    //                         }
+    //                     }
+    //
+    //                     if ((data.marathonbet.odds).length > 0) {
+    //                         if (data.marathonbet.blob) {
+    //                             marathonBlob = `<h4><b>Marathonbet</b></h4><p>Odds: ${data.marathonbet.odds} </p>`;
+    //
+    //                             data.marathonbet.blob.items.forEach(function (e) {
+    //                                 marathonBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+    //                             });
+    //
+    //                             marathonBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.marathonbet.blob.openOdds.date}</span><span>${data.marathonbet.blob.openOdds.val}</span></div>`;
+    //
+    //                         }
+    //                     }
+    //
+    //                     if ((data.xbet.odds).length > 0) {
+    //                         if (data.xbet.blob) {
+    //                             xbetBlob = `<h4><b>1Xbet</b></h4><p>Odds: ${data.xbet.odds} </p>`;
+    //
+    //                             data.xbet.blob.items.forEach(function (e) {
+    //                                 xbetBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
+    //                             });
+    //
+    //                             xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span><span>${data.xbet.blob.openOdds.val}</span></div>`;
+    //
+    //                         }
+    //                     }
+    //
+    //                     if ((data.pinnacle.odds).length === 0 && (data.marathonbet.odds).length === 0 && (data.xbet.odds).length === 0) {
+    //                         console.log('There are no useful odds on link: ' + href);
+    //                     } else {
+    //
+    //                         $('#matches-list')
+    //                             .append('<li><div><a href="' + href + '" target="_blank"><h3>' + data.title + '</h3></a><p>' + data.date + '</p><div>' +
+    //                                 '<div class="row" style="max-width: 860px;">' +
+    //                                 '<div class="col-lg-4">' + pinnacleBlob + '</div>' +
+    //                                 '<div class="col-lg-4">' + xbetBlob + '</div>' +
+    //                                 '<div class="col-lg-4">' + marathonBlob + '</div>' +
+    //                                 '</div><span>Delta pinnacle = ' + data.pinnacle.delta + '</span>, ' +
+    //                                 '<span>Delta marathonbet = ' + data.marathonbet.delta + '</span>, ' +
+    //                                 '<span>Delta xbet = ' + data.xbet.delta + '</span>' +
+    //                                 '<hr></li>')
+    //                     }
+    //
+    //                     if (index >= links.length) {
+    //
+    //                         $('#loading-img').fadeOut();
+    //                         $('#get-matches').prop('disabled', false);
+    //
+    //                     }
+    //                 }
+    //
+    //             },
+    //             error: function (err) {
+    //                 console.log(err);
+    //             }
+    //         });
+    //
+    //
+    // });
 }
 
 refreshMatches();

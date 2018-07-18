@@ -3,6 +3,7 @@ const _ = require('underscore');
 const puppeteer = require('puppeteer');
 const config = require('./config');
 const html2json = require('html2json').html2json;
+let Filter = require('../models/filter');
 
 const baseUrl = config.baseUrl;
 
@@ -33,6 +34,13 @@ async function parseMatches(type = 'json') {
             linksUl = await getMatchesJSON($);
             break; // return in json for storing
     }
+
+    let filters = await Filter.find({}).exec();
+
+    // 1 - country
+    // 2 - championship
+
+    console.log(filters);
 
     await browser.close();
 

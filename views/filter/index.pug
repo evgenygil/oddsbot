@@ -1,0 +1,55 @@
+extends ../layout
+
+block content
+    h2= title
+
+    div.row
+        div.col-lg-11
+            form(method='POST', action='/filters/add')
+                h2 Add filter
+                div.col-sm-2
+                    div.form-group-sm
+                        label Type:
+                        select.form-control(name='type')
+                            option(value="1") Country
+                            option(value="2") Championship
+                div.col-sm-4
+                    div.form-group-sm
+                        label Value:
+                            input.form-control(type='text', name='value', value='', placeholder='You can use regular expression')
+                div.col-sm-4
+                    div.form-group-sm
+                        label Comment:
+                            input.form-control(type='text', name='comment', value='')
+                div.col-sm-2
+                    br
+                    div.form-group-sm
+                        label &nbsp;
+                            input.btn.btn-sm.btn-primary(type='submit', value='+')
+        div.col-lg-1
+    hr
+    div.row
+        div.col-lg-10
+            h2 Recent filters
+            br
+            if (filters)
+                ul.list-group
+                    each filter, i in filters
+                        li.list-group-item
+                            i.pull-right.strategy-date.hint #{filter.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+                            case parseInt(filter.type)
+                                when 1
+                                    span
+                                      b Country
+                                when 2
+                                    span
+                                      b Championship
+                            span.margin-l-10  |
+                                b.margin-l-10  #{filter.value}
+                            //a.btn.btn-default(href='/strategies/edit/' + strategy._id) Edit
+                            //i &nbsp;
+                            span.margin-l-10 |
+                                b.margin-l-10.hint  #{filter.comment}
+                            span.margin-l-10
+                                a.margin-l-10.btn.btn-sm.btn-danger(href='/filters/delete/' + filter._id) Delete
+        div.col-lg-2

@@ -3,12 +3,15 @@ extends ../layout
 block content
   h2= title
 
-  div
-    i &nbsp;
-    button#get-matches.btn.btn-sm.btn-primary(style='width: 130px; margin-bottom: 5px; display: none') Get matches
-
+  //div
+  //  i &nbsp;
+  //  button#get-matches.btn.btn-sm.btn-primary(style='width: 130px; margin-bottom: 5px; display: none') Get matches
+  p Working:&nbsp;
+    span#seconds-work
   div#loading-img(style='display:none')
     img(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 60px; margin-top: 10px')
+    span.margin-l-10 Remaining:&nbsp;
+      span#remaining-items
 
   div#responce-text(style='float:left; width: 80%; display: none')
 

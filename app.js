@@ -4,12 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const lessMiddleware = require('less-middleware');
 const logger = require('morgan');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 const mongoose = require('mongoose');
 const config = require('./common/db');
 
 const indexRouter = require('./routes/index');
 const monitorRouter = require('./routes/monitor');
 const logsRouter = require('./routes/logs');
+const filtersRouter = require('./routes/filters');
+
+let app = express();
 
 mongoose.connect(config.database);
 let db = mongoose.connection;
@@ -24,8 +31,20 @@ db.on('error', function (err) {
     console.log(err);
 });
 
+// Express Session Middleware
+app.use(session({
+    secret: 'qwerty123',
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    resave: true,
+    saveUninitialized: true
+}));
 
-var app = express();
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/monitor', monitorRouter);
 app.use('/logs', logsRouter);
+app.use('/filters', filtersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

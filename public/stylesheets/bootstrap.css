@@ -2506,9 +2506,9 @@ legend {
     border-bottom: 1px solid #e5e5e5;
 }
 label {
-    display: inline-block;
+    /*display: inline-block;*/
     max-width: 100%;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     font-weight: bold;
 }
 input[type="search"] {
