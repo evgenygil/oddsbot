@@ -6,7 +6,7 @@ let uniqueValidator = require('mongoose-unique-validator');
 
 mongoosePaginate.paginate.options = {
     lean: true,
-    limit: 30
+    limit: 5
 };
 
 // Log Schema

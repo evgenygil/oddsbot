@@ -11,7 +11,7 @@ router.get('/loadallmatches', function (req, res, next) {
 
     (async () => {
 
-        let matches =  await parser.parseMatches('html');
+        let matches =  await parser.parseMatches();
 
         res.send(matches);
 

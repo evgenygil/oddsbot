@@ -15,6 +15,7 @@ const indexRouter = require('./routes/index');
 const monitorRouter = require('./routes/monitor');
 const logsRouter = require('./routes/logs');
 const filtersRouter = require('./routes/filters');
+const settingsRouter = require('./routes/settings');
 
 let app = express();
 
@@ -61,6 +62,7 @@ app.use('/', indexRouter);
 app.use('/monitor', monitorRouter);
 app.use('/logs', logsRouter);
 app.use('/filters', filtersRouter);
+app.use('/settings', settingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

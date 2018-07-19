@@ -18,9 +18,7 @@ db.on('error', function (err) {
 
     let matches =  await parser.parseMatches('json');
 
-    let links = matches.links;
-
-    await helpers.asyncForEach(links, async (link) => {
+    await helpers.asyncForEach(matches, async (link) => {
         let match = await parser.parseMatch(config.baseUrl + link, 'json', true);
 
         if (match) {

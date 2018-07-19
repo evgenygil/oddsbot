@@ -8,9 +8,7 @@ let Filter = require('../models/filter');
 const baseUrl = config.baseUrl;
 
 
-async function parseMatches(type = 'json') {
-
-    let linksUl;
+async function parseMatches() {
 
     const browser = await puppeteer.launch({
         timeout: 0,
@@ -25,26 +23,13 @@ async function parseMatches(type = 'json') {
 
     let $ = await cheerio.load(content);
 
-    switch (type) {
-        case 'html':
-            linksUl = await getMatchesHTML($);
-            break; // return in html for monitor page
-        case 'json':
-        default:
-            linksUl = await getMatchesJSON($);
-            break; // return in json for storing
-    }
+        let linksUl = await getMatches($);
 
-    let filters = await Filter.find({}).exec();
-
-    // 1 - country
-    // 2 - championship
-
-    console.log(filters);
+        let filteredUl = await procceedLinks(linksUl);
 
     await browser.close();
 
-    return linksUl;
+    return filteredUl;
 
 }
 
@@ -96,50 +81,41 @@ async function parseMatch(matchLink, type = 'json', log = false) {
     }
 }
 
+async function procceedLinks(linksUl) {
 
-function getMatchesHTML($) {
-    return new Promise(function (resolve, reject) {
+    let countries = await Filter.find({type: 1}).select('value').exec(); // country
+    let leagues = await Filter.find({type: 2}).select('value').exec(); // league
 
-        if ($) {
-            let linksArr = [];
-            let linksUl = '<ul style="list-style-type: none; font-size: 10px" id="links-list">';
-
-            $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
-                let href = element.attribs.href;
-                if (href.includes('/soccer/')) {
-                    linksArr.push(href);
-                    linksUl += '<li>' + baseUrl + href + '</li>';
-                }
-            });
-
-            linksUl += '</ul>';
-
-            resolve(linksUl)
-        }
-        else {
-            reject('error')
-        }
+    let countriesArr = await countries.map(function (e) {
+        return e.value
     });
+    let leaguesArr = await leagues.map(function (e) {
+        return e.value
+    });
+
+    return await linksUl.filter(function (value) {
+        let splitted = value.split('/');
+        return ((countriesArr.indexOf(splitted[2]) < 0) && (leaguesArr.indexOf(splitted[3]) < 0));
+    });
+
 }
 
-function getMatchesJSON($) {
+
+function getMatches($) {
     return new Promise(function (resolve, reject) {
 
         if ($) {
 
-            let entity = {
-                title: 'Soccer',
-                links: []
-            };
+            let matches = [];
 
             $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
                 let href = element.attribs.href;
                 if (href.includes('/soccer/')) {
-                    entity.links.push(href);
+                    matches.push(href);
                 }
             });
 
-            resolve(entity)
+            resolve(matches)
         }
         else {
             reject('error')
@@ -271,7 +247,6 @@ function getJsonFromHtml(data) {
                     console.log(e.stack);
                     console.log('Error in obj parsing. Broken blob: ' + JSON.stringify(val));
                 }
-
 
             }
 

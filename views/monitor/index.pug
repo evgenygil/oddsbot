@@ -9,7 +9,7 @@ block content
   p Working:&nbsp;
     span#seconds-work
   div#loading-img(style='display:none')
-    img(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 60px; margin-top: 10px')
+    img(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 40px; margin-top: 10px')
     span.margin-l-10 Remaining:&nbsp;
       span#remaining-items
 
@@ -17,3 +17,11 @@ block content
 
   ul#matches-list(style='list-style-type:decimal; margin-top: 15px')
 
+  script.
+    window.onload = function () {
+        refreshMatches();
+
+        setInterval(function () {
+            refreshMatches();
+        }, 7200000);
+    }
