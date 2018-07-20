@@ -3,7 +3,7 @@
     {
       "name": "ODDSBOT",
       "script": "./bin/www",
-      "instances": "-1",
+      "instances": "0",
       "exec_mode": "cluster"
     },
   ]
