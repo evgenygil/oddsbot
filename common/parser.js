@@ -10,14 +10,14 @@ const baseUrl = config.baseUrl;
 async function parseMatches() {
 
     const browser = await puppeteer.launch({
-        timeout: 0,
+        timeout: 80000,
         args: config.pupArgs
     });
 
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
-    await page.goto(config.soccerUrl);
+    await page.goto(config.soccerUrl).catch((e) => console.log(e.stack));
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
@@ -35,7 +35,9 @@ async function parseMatches() {
 async function parseMatch(matchLink, type = 'json', log = false) {
 
     const browser = await puppeteer.launch({
-        timeout: 0,
+        networkIdleTimeout: 80000,
+        waitUntil: 'networkidle',
+        timeout: 80000,
         args: config.pupArgs
     });
     const page = await browser.newPage();
