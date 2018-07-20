@@ -17,7 +17,7 @@ async function parseMatches() {
     });
 
     const page = await browser.newPage();
-    await browser.userAgent(config.userAgent);
+    await browser.userAgent();
     await page.setViewport({width: 1440, height: 960});
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ',  e.stack));
     let content = await page.evaluate(() => document.body.innerHTML);
@@ -43,7 +43,7 @@ async function parseMatch(matchLink, type = 'json', log = false) {
         args: config.pupArgs
     });
     const page = await browser.newPage();
-    await browser.userAgent(config.userAgent);
+    await browser.userAgent();
     await page.setViewport({width: 1440, height: 960});
     await page.goto(matchLink);
     let content = await page.evaluate(() => document.body.innerHTML);
