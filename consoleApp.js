@@ -40,7 +40,7 @@ db.on('error', function (err) {
 
             if (entMatch !== undefined) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ',  e.stack));
-                if ((oldMatches.indexOf(link) < 0)) {
+                if ((oldMatches.length > 0) && (oldMatches.indexOf(link) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
                 }
             }
