@@ -3,7 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const lessMiddleware = require('less-middleware');
-const logger = require('morgan');
+const logger = require('logger').createLogger('./logs/oddswork.log');
+
 const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);

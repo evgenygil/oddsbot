@@ -3,6 +3,8 @@ const _ = require('underscore');
 const puppeteer = require('puppeteer');
 const config = require('./config');
 const html2json = require('html2json').html2json;
+const logger = require('logger').createLogger('./logs/oddswork.log');
+
 let Filter = require('../models/filter');
 
 const baseUrl = config.baseUrl;
@@ -17,14 +19,14 @@ async function parseMatches() {
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
-    await page.goto(config.soccerUrl).catch((e) => console.log(e.stack));
+    await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ',  e.stack));
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
 
-        let linksUl = await getMatches($);
+        let linksUl = await getMatches($).catch((e) => logger.error('getMatches Error ',  e.stack));
 
-        let filteredUl = await procceedLinks(linksUl);
+        let filteredUl = await procceedLinks(linksUl).catch((e) => logger.error('procceedLinks Error ',  e.stack));
 
     await browser.close();
 
@@ -48,7 +50,7 @@ async function parseMatch(matchLink, type = 'json', log = false) {
 
     let $ = await cheerio.load(content);
 
-    let match = await getMatchData($);
+    let match = await getMatchData($).catch((e) => logger.error('getMatchData Error ',  e.stack));
 
     let timeInterval = (log) ? 1800 : 10800;
 
@@ -57,21 +59,21 @@ async function parseMatch(matchLink, type = 'json', log = false) {
         if (match.pinnacle.hint) {
             await page.hover('div[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(300);
-            let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
-            match.pinnacle.blob = await getJsonFromHtml(pinacle);
+            let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
+            match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
         }
 
         if (match.marathonbet.hint) {
             await page.hover('div[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(600);
-            let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
-            match.marathonbet.blob = await getJsonFromHtml(marathonbet);
+            let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
+            match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
         }
         if (match.xbet.hint) {
             await page.hover('div[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(900);
-            let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>'));
-            match.xbet.blob = await getJsonFromHtml(xbet);
+            let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
+            match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
         }
 
         await browser.close();
@@ -199,10 +201,7 @@ function getMatchData($) {
                         try {
                             match.xbet.hint = divS[min].attribs.onmouseover;
                         } catch (e) {
-                            console.log(e.stack);
-                            console.log('Error in hint ' + divS);
-                            console.log('Element: ' + element.toString());
-
+                            logger.error('Error in hint ', e.stack);
                         }
                     }
                 });
