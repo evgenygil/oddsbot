@@ -24,8 +24,7 @@ function refreshMatches() {
         },
         error: function (err) {
             console.log(err);
-        },
-        timeout: 20000
+        }
     });
 }
 

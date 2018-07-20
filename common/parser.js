@@ -7,7 +7,6 @@ let Filter = require('../models/filter');
 
 const baseUrl = config.baseUrl;
 
-
 async function parseMatches() {
 
     const browser = await puppeteer.launch({

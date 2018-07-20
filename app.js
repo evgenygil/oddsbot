@@ -19,7 +19,7 @@ const settingsRouter = require('./routes/settings');
 
 let app = express();
 
-mongoose.connect(config.database);
+mongoose.connect(config.database, {useNewUrlParser: true });
 let db = mongoose.connection;
 
 // Check connection
