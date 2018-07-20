@@ -12,12 +12,11 @@ const baseUrl = config.baseUrl;
 async function parseMatches() {
 
     const browser = await puppeteer.launch({
-        timeout: 80000,
-        args: config.pupArgs
+        timeout: 80000
     });
 
     const page = await browser.newPage();
-    await browser.userAgent();
+    await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ',  e.stack));
     let content = await page.evaluate(() => document.body.innerHTML);
@@ -39,11 +38,10 @@ async function parseMatch(matchLink, type = 'json', log = false) {
     const browser = await puppeteer.launch({
         networkIdleTimeout: 80000,
         waitUntil: 'networkidle',
-        timeout: 80000,
-        args: config.pupArgs
+        timeout: 80000
     });
     const page = await browser.newPage();
-    await browser.userAgent();
+    await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
     await page.goto(matchLink);
     let content = await page.evaluate(() => document.body.innerHTML);
