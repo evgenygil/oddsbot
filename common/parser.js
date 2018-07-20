@@ -268,6 +268,6 @@ function getJsonFromHtml(data) {
 }
 
 module.exports = {
-    parseMatches: parseMatches,
-    parseMatch: parseMatch,
+    parseMatches,
+    parseMatch,
 };
