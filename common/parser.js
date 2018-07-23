@@ -37,8 +37,6 @@ async function parseMatches() {
 async function parseMatch(matchLink, type = 'json', log = false) {
 
     const browser = await puppeteer.launch({
-        networkIdleTimeout: 80000,
-        waitUntil: 'networkidle',
         timeout: 80000,
         args: ['--no-sandbox']
     });
