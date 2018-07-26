@@ -13,8 +13,7 @@ async function parseMatches() {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
-        args: ['--no-sandbox'],
-        // args: config.pupArgs
+        args: config.pupArgs
     });
 
     const page = await browser.newPage();
@@ -39,8 +38,7 @@ async function parseMatch(matchLink, type = 'json', log = false) {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
-        args: ['--no-sandbox'],
-        // args: config.pupArgs
+        args: config.pupArgs
     });
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
@@ -88,6 +86,7 @@ async function procceedLinks(linksUl) {
 
     let countries = await Filter.find({type: 1}).select('value').exec(); // country
     let leagues = await Filter.find({type: 2}).select('value').exec(); // league
+    let countryChamp = await Filter.find({type: 3}).select('value').exec(); // league
 
     let countriesArr = await countries.map(function (e) {
         return e.value
@@ -95,11 +94,36 @@ async function procceedLinks(linksUl) {
     let leaguesArr = await leagues.map(function (e) {
         return e.value
     });
+    let countryChampArr = await countryChamp.map(function (e) {
+        return e.value
+    });
 
-    return await linksUl.filter(function (value) {
+    // filter by Global
+    // TODO Remove, use only checker for combined values
+    let linksGlobalFiltered = await linksUl.filter(function (value) {
         let splitted = value.split('/');
         return ((countriesArr.indexOf(splitted[2]) < 0) && (leaguesArr.indexOf(splitted[3]) < 0));
     });
+
+    const checker = value =>
+        !countryChampArr.some(element => value.includes(element));
+
+    return await linksGlobalFiltered.filter(checker);
+
+}
+
+async function procceedLinksMerged(linksUl) {
+
+    let leagues = await Filter.find({type: 3}).select('value').exec(); // country/championship
+
+    let leaguesArr = await leagues.map(function (e) {
+        return e.value
+    });
+
+    const checker = value =>
+        !leaguesArr.some(element => value.includes(element));
+
+    return await linksUl.filter(checker);
 
 }
 
