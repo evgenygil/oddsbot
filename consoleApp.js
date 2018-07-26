@@ -1,3 +1,5 @@
+process.setMaxListeners(0);
+
 const parser = require('./common/parser');
 const dbConfig = require('./common/db');
 const mongoose = require('mongoose');
@@ -10,7 +12,7 @@ let Log = require('./models/log');
 
 let tgApi = new telegram({token: config.telegramToken});
 
-const timeout = ms => new Promise(res => setTimeout(res, ms))
+const timeout = ms => new Promise(res => setTimeout(res, ms));
 
 mongoose.connect(dbConfig.database, {useNewUrlParser: true});
 let db = mongoose.connection;

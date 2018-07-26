@@ -13,7 +13,8 @@ async function parseMatches() {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
-        args: ['--no-sandbox']
+        args: ['--no-sandbox'],
+        // args: config.pupArgs
     });
 
     const page = await browser.newPage();
@@ -38,7 +39,8 @@ async function parseMatch(matchLink, type = 'json', log = false) {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
-        args: ['--no-sandbox']
+        args: ['--no-sandbox'],
+        // args: config.pupArgs
     });
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
