@@ -110,7 +110,7 @@ function getMatches() {
                         } else {
 
                             $('#matches-list')
-                                .append('<li><div><a href="' + href + '" target="_blank"><h3>' + data.title + '</h3></a><p>' + data.date + '</p><div>' +
+                                .append('<li><div><a href="' + href + '" target="_blank"><h3>' + data.title + '</h3></a><p>' + data.date + '</p><p>' + data.league + '</p><div>' +
                                     '<div class="row" style="max-width: 860px;">' +
                                     '<div class="col-lg-4">' + pinnacleBlob + '</div>' +
                                     '<div class="col-lg-4">' + xbetBlob + '</div>' +

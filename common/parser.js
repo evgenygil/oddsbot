@@ -20,6 +20,12 @@ async function parseMatches() {
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ',  e.stack));
+    await page.waitFor(1000);
+    await page.click('a[id="user-header-timezone-expander"]').catch((e) => console.log(e.stack));
+    await page.waitFor(1000);
+    await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
+    await page.waitFor(2000);
+
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
@@ -34,7 +40,7 @@ async function parseMatches() {
 
 }
 
-async function parseMatch(matchLink, type = 'json', log = false) {
+async function parseMatch(matchLink, type = 'json') {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
@@ -44,13 +50,14 @@ async function parseMatch(matchLink, type = 'json', log = false) {
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
     await page.goto(matchLink);
+    await page.waitFor(1000);
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
 
     let match = await getMatchData($).catch((e) => logger.error('getMatchData Error ',  e.stack));
 
-    let timeInterval = (log) ? 1800 : 10800;
+    let timeInterval = 10800;
 
     if (match.pinnacle.odds.length > 0 && (Date.parse(match.date) - (Date.now()) < timeInterval)) {
 
@@ -154,9 +161,13 @@ function getMatchData($) {
     return new Promise(function (resolve, reject) {
 
         if ($) {
+
+            let breadcrumb = $('div#breadcrumb').find('a');
+
             let match = {
                 title: $('div#col-content > h1').text(),
                 date: $('p.date').text(),
+                league: $(breadcrumb[2]).text() + '/' + $(breadcrumb[3]).text(),
                 pinnacle: {
                     odds: [],
                     hint: false,

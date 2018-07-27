@@ -19,6 +19,10 @@ let logSchema = mongoose.Schema({
             type: String,
             required: true
         },
+        league: {
+            type: String,
+            required: true
+        },
         pinnacle: {
             type: Object,
             required: true,
