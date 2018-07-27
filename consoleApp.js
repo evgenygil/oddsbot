@@ -25,10 +25,12 @@ db.on('error', function (err) {
 (async () => {
 
     logger.info('Start working...');
+    console.log('Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
     logger.info('Total matches to parse: ' + matches.length);
+    console.log('Total matches to parse: ' + matches.length);
 
     let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
     let oldMatches = await matchesFile.split(',');
