@@ -4,10 +4,9 @@ const puppeteer = require('puppeteer');
 const config = require('./config');
 const html2json = require('html2json').html2json;
 const logger = require('logger').createLogger('./logs/oddswork.log');
+const moment = require('moment');
 
 let Filter = require('../models/filter');
-
-const baseUrl = config.baseUrl;
 
 async function parseMatches() {
 
@@ -19,20 +18,21 @@ async function parseMatches() {
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
-    await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ',  e.stack));
-    await page.waitFor(1000);
+    await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
+    await page.waitForSelector('#table-matches');
     await page.click('a[id="user-header-timezone-expander"]').catch((e) => console.log(e.stack));
-    await page.waitFor(1000);
+    await page.waitFor(3000);
     await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
-    await page.waitFor(2000);
+    await page.waitFor(3000);
+    await page.screenshot({path: 'set-timezone.png'});
 
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
 
-        let linksUl = await getMatches($).catch((e) => logger.error('getMatches Error ',  e.stack));
+    let linksUl = await getMatches($).catch((e) => logger.error('getMatches Error ', e.stack));
 
-        let filteredUl = await procceedLinks(linksUl).catch((e) => logger.error('procceedLinks Error ',  e.stack));
+    let filteredUl = await procceedLinks(linksUl).catch((e) => logger.error('procceedLinks Error ', e.stack));
 
     await browser.close();
 
@@ -40,7 +40,7 @@ async function parseMatches() {
 
 }
 
-async function parseMatch(matchLink, type = 'json') {
+async function parseMatch(matchLink, type = 'json', time) {
 
     const browser = await puppeteer.launch({
         timeout: 80000,
@@ -49,36 +49,36 @@ async function parseMatch(matchLink, type = 'json') {
     const page = await browser.newPage();
     await browser.userAgent(config.userAgent);
     await page.setViewport({width: 1440, height: 960});
-    await page.goto(matchLink);
-    await page.waitFor(1000);
+    await page.goto(matchLink).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
+    await page.waitForSelector('#odds-data-table');
+    await page.screenshot({path: 'odds-data-table.png'});
+
     let content = await page.evaluate(() => document.body.innerHTML);
 
     let $ = await cheerio.load(content);
 
-    let match = await getMatchData($).catch((e) => logger.error('getMatchData Error ',  e.stack));
+    let match = await getMatchData($, time).catch((e) => logger.error('getMatchData Error ', e.stack));
 
-    let timeInterval = 10800;
-
-    if (match.pinnacle.odds.length > 0 && (Date.parse(match.date) - (Date.now()) < timeInterval)) {
+    if (match.pinnacle.odds.length > 0) {
 
         if (match.pinnacle.hint) {
             await page.hover('div[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(300);
-            let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
-            match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
+            let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
+            match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         if (match.marathonbet.hint) {
             await page.hover('div[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(600);
-            let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
-            match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
+            let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
+            match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
         if (match.xbet.hint) {
             await page.hover('div[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log(e.stack));
             await page.waitFor(900);
-            let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ',  e.stack));
-            match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ',  e.stack));
+            let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
+            match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         await browser.close();
@@ -91,31 +91,16 @@ async function parseMatch(matchLink, type = 'json') {
 
 async function procceedLinks(linksUl) {
 
-    let countries = await Filter.find({type: 1}).select('value').exec(); // country
-    let leagues = await Filter.find({type: 2}).select('value').exec(); // league
     let countryChamp = await Filter.find({type: 3}).select('value').exec(); // league
 
-    let countriesArr = await countries.map(function (e) {
-        return e.value
-    });
-    let leaguesArr = await leagues.map(function (e) {
-        return e.value
-    });
     let countryChampArr = await countryChamp.map(function (e) {
         return e.value
     });
 
-    // filter by Global
-    // TODO Remove, use only checker for combined values
-    let linksGlobalFiltered = await linksUl.filter(function (value) {
-        let splitted = value.split('/');
-        return ((countriesArr.indexOf(splitted[2]) < 0) && (leaguesArr.indexOf(splitted[3]) < 0));
-    });
-
     const checker = value =>
-        !countryChampArr.some(element => value.includes(element));
+        !countryChampArr.some(element => value.href.includes(element));
 
-    return await linksGlobalFiltered.filter(checker);
+    return await linksUl.filter(checker);
 
 }
 
@@ -141,11 +126,19 @@ function getMatches($) {
         if ($) {
 
             let matches = [];
+            let now = moment();
+
 
             $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
                 let href = element.attribs.href;
-                if (href.includes('/soccer/')) {
-                    matches.push(href);
+                let time = ($(element).parent().prev().text());
+
+                if (href.includes('/soccer/') && time.includes(':')) {
+                    let timeMoment = moment((time + ':00'), 'HH:mm:ss a');
+                    let duration = timeMoment.diff(now, 'minutes');
+                    if (duration > 9 && duration < 181) {
+                        matches.push({href: href, time: time});
+                    }
                 }
             });
 
@@ -157,7 +150,7 @@ function getMatches($) {
     });
 }
 
-function getMatchData($) {
+function getMatchData($, time) {
     return new Promise(function (resolve, reject) {
 
         if ($) {
@@ -166,7 +159,7 @@ function getMatchData($) {
 
             let match = {
                 title: $('div#col-content > h1').text(),
-                date: $('p.date').text(),
+                date: time,
                 league: $(breadcrumb[2]).text() + '/' + $(breadcrumb[3]).text(),
                 pinnacle: {
                     odds: [],
@@ -188,7 +181,8 @@ function getMatchData($) {
                 .find('a.name2')
                 .each(function (index, element) {
                     if ((element.attribs.href).includes('pinnacle')) {
-                        let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+
+                        let divS = $(element).parent().parent().parent().find('td.right.odds');
                         divS.each(function (i, e) {
                             match.pinnacle.odds.push($(e).text());
                         });
@@ -199,13 +193,11 @@ function getMatchData($) {
                         try {
                             match.pinnacle.hint = divS[min].attribs.onmouseover;
                         } catch (e) {
-                            console.log(e.stack);
-                            console.log('Error in hint: ' + divS);
-                            console.log('Element: ' + element.toString());
+                            logger.error('Error in hint ', e.stack);
                         }
                     }
                     if ((element.attribs.href).includes('marathonbet')) {
-                        let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                        let divS = $(element).parent().parent().parent().find('td.right.odds');
                         divS.each(function (i, e) {
                             match.marathonbet.odds.push($(e).text());
                         });
@@ -217,14 +209,11 @@ function getMatchData($) {
                         try {
                             match.marathonbet.hint = divS[min].attribs.onmouseover;
                         } catch (e) {
-                            console.log(e.stack);
-                            console.log('Error in hint ' + divS);
-                            console.log('Element: ' + element.toString());
-
+                            logger.error('Error in hint ', e.stack);
                         }
                     }
                     if ((element.attribs.href).includes('1xbet')) {
-                        let divS = $(element).parent().parent().parent().find('td.right.odds > div');
+                        let divS = $(element).parent().parent().parent().find('td.right.odds');
                         divS.each(function (i, e) {
                             match.xbet.odds.push($(e).text());
                         });

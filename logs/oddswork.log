@@ -40,3 +40,861 @@ info [Fri Jul 20 2018 17:14:22 GMT+0300 (MSK)]  Atletico-PR - Internacional is n
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+info [Thu Jul 26 2018 23:24:28 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:24:40 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 168
+error [Thu Jul 26 2018 23:24:40 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+info [Thu Jul 26 2018 23:25:35 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:25:39 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 168
+error [Thu Jul 26 2018 23:25:39 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+info [Thu Jul 26 2018 23:25:52 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:25:57 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 113
+error [Thu Jul 26 2018 23:25:57 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+info [Thu Jul 26 2018 23:29:22 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:29:27 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 106
+error [Thu Jul 26 2018 23:29:27 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+info [Thu Jul 26 2018 23:30:42 GMT+0300 (Moscow Standard Time)]  Start working...
+
+
+
+
+
+info [Thu Jul 26 2018 23:37:05 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:37:09 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 104
+error [Thu Jul 26 2018 23:37:09 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+info [Thu Jul 26 2018 23:40:18 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:40:31 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 100
+error [Thu Jul 26 2018 23:40:31 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+info [Thu Jul 26 2018 23:41:06 GMT+0300 (Moscow Standard Time)]  Start working...
+info [Thu Jul 26 2018 23:41:13 GMT+0300 (Moscow Standard Time)]  Total matches to parse: 93
+error [Thu Jul 26 2018 23:41:13 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+error [Fri Jul 27 2018 22:27:22 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:27:28 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+error [Fri Jul 27 2018 22:30:21 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:30:27 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+info [Fri Jul 27 2018 22:30:34 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'name' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Fri Jul 27 2018 22:30:56 GMT+0300 (Moscow Standard Time)]  Atletico-PR (Bra)  - Penarol (Uru)  saved.
+
+
+
+error [Fri Jul 27 2018 22:39:19 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:39:26 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:41:34 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:41:40 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:43:11 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:43:17 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:47:50 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:47:58 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:78:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Fri Jul 27 2018 22:50:35 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:50:44 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:53:43 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:53:53 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:55:03 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:55:14 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:55:42 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:55:51 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:57:54 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:58:02 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 22:58:28 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 22:58:36 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:01:35 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:01:43 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:03:48 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:03:57 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:04:58 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:05:07 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:05:52 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:06:04 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:16:56 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:17:25 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:17:33 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:18:52 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Fri Jul 27 2018 23:19:02 GMT+0300 (Moscow Standard Time)]  The Strongest - Wilstermann is not interesting match
+
+
+
+error [Fri Jul 27 2018 23:31:03 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:41:59 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:134:53)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:41:59 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:41:59 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:42:48 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:134:53)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:42:48 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:42:48 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:43:32 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:134:53)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:43:32 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:43:32 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:44:36 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:46:46 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:50:19 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:50:44 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:51:13 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:137:50)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:51:13 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:51:13 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:53:13 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:56:51 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:57:54 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:59:06 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:137:50)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:59:06 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:59:06 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:59:37 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:137:50)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:59:37 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Fri Jul 27 2018 23:59:37 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Fri Jul 27 2018 23:59:58 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:00:15 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:02:01 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:137:46)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:02:01 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:02:01 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:03:05 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:137:30)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:03:05 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:03:05 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:03:30 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:05:34 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:140:34)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:05:34 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:05:34 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:06:10 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:06:33 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:140:51)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:06:33 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:06:33 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:06:59 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:08:05 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:10:39 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+
+error [Sat Jul 28 2018 00:13:29 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.diff is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:144:37)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:13:29 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:13:29 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+
+
+
+
+error [Sat Jul 28 2018 00:19:55 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.includes is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:148:55)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:19:55 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:19:55 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:20:41 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.includes is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:148:55)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:20:41 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:20:41 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:21:20 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.includes is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:144:55)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:21:20 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:21:20 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:21:37 GMT+0300 (Moscow Standard Time)]  getMatches Error  TypeError: time.includes is not a function
+    at Node.$.find.each (/home/gil/Projects/oddsbot/common/parser.js:144:55)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:131:71
+    at new Promise (<anonymous>)
+    at getMatches (/home/gil/Projects/oddsbot/common/parser.js:123:12)
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:32:29)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:21:37 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: linksUl.filter is not a function
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:102:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:21:37 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:23:26 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:25:27 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:32:09 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: value.includes is not a function
+    at countryChampArr.some.element (/home/gil/Projects/oddsbot/common/parser.js:98:48)
+    at Array.some (<anonymous>)
+    at checker (/home/gil/Projects/oddsbot/common/parser.js:98:26)
+    at Array.filter (<anonymous>)
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:100:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:32:09 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+error [Sat Jul 28 2018 00:32:39 GMT+0300 (Moscow Standard Time)]  Puppeteeer goto Error  Error: Navigation Timeout Exceeded: 30000ms exceeded
+    at Promise.then (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/NavigatorWatcher.js:73:21)
+
+
+
+error [Sat Jul 28 2018 00:33:51 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: value.includes is not a function
+    at countryChampArr.some.element (/home/gil/Projects/oddsbot/common/parser.js:98:48)
+    at Array.some (<anonymous>)
+    at checker (/home/gil/Projects/oddsbot/common/parser.js:98:26)
+    at Array.filter (<anonymous>)
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:100:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:33:51 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 00:34:55 GMT+0300 (Moscow Standard Time)]  procceedLinks Error  TypeError: value.includes is not a function
+    at countryChampArr.some.element (/home/gil/Projects/oddsbot/common/parser.js:98:48)
+    at Array.some (<anonymous>)
+    at checker (/home/gil/Projects/oddsbot/common/parser.js:98:26)
+    at Array.filter (<anonymous>)
+    at procceedLinks (/home/gil/Projects/oddsbot/common/parser.js:100:26)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 00:34:55 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+error [Sat Jul 28 2018 00:39:26 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:39:33 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:78:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:40:05 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+error [Sat Jul 28 2018 00:40:35 GMT+0300 (Moscow Standard Time)]  Puppeteeer goto Error  Error: Navigation Timeout Exceeded: 30000ms exceeded
+    at Promise.then (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/NavigatorWatcher.js:73:21)
+info [Sat Jul 28 2018 00:40:37 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:78:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:40:46 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:78:27)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+
+
+
+error [Sat Jul 28 2018 00:42:05 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:42:10 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:16 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:21 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:26 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:34 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:42 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:42:50 GMT+0300 (Moscow Standard Time)]  Monarcas - Santos Laguna saved.
+error [Sat Jul 28 2018 00:43:05 GMT+0300 (Moscow Standard Time)]  Send to TG API error  RequestError: Error: read ECONNRESET
+    at new RequestError (/home/gil/Projects/oddsbot/node_modules/request-promise/lib/errors.js:11:15)
+    at Request.RP$callback [as _callback] (/home/gil/Projects/oddsbot/node_modules/request-promise/lib/rp.js:60:32)
+    at self.callback (/home/gil/Projects/oddsbot/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:182:13)
+    at Request.onRequestError (/home/gil/Projects/oddsbot/node_modules/request/request.js:877:8)
+    at ClientRequest.emit (events.js:182:13)
+    at TLSSocket.socketErrorListener (_http_client.js:382:9)
+    at TLSSocket.emit (events.js:182:13)
+    at emitErrorNT (internal/streams/destroy.js:82:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:50:3)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+info [Sat Jul 28 2018 00:43:12 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:43:18 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:43:23 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:49:35 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:49:39 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:50:00 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:50:06 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:52:01 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:52:04 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:54:08 GMT+0300 (Moscow Standard Time)]  parseMatches error:  Error: Navigation Timeout Exceeded: 30000ms exceeded
+    at Promise.then (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/NavigatorWatcher.js:73:21)
+error [Sat Jul 28 2018 00:54:08 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+error [Sat Jul 28 2018 00:54:39 GMT+0300 (Moscow Standard Time)]  Puppeteeer goto Error  Error: Navigation Timeout Exceeded: 30000ms exceeded
+    at Promise.then (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/NavigatorWatcher.js:73:21)
+error [Sat Jul 28 2018 00:55:09 GMT+0300 (Moscow Standard Time)]  parseMatch error:  Error: waiting for selector "#odds-data-table" failed: timeout 30000ms exceeded
+    at new WaitTask (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/FrameManager.js:840:28)
+    at Frame._waitForSelectorOrXPath (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/FrameManager.js:731:12)
+    at Frame.waitForSelector (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/FrameManager.js:690:17)
+    at Page.waitForSelector (/home/gil/Projects/oddsbot/node_modules/puppeteer/lib/Page.js:1008:29)
+    at Object.parseMatch (/home/gil/Projects/oddsbot/common/parser.js:53:16)
+info [Sat Jul 28 2018 00:55:09 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'blob' of undefined
+    at /home/gil/Projects/oddsbot/consoleApp.js:135:45
+    at new Promise (<anonymous>)
+    at proceedMatch (/home/gil/Projects/oddsbot/consoleApp.js:130:12)
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:79:34)
+
+
+
+error [Sat Jul 28 2018 00:55:44 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:55:47 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:76:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 00:55:52 GMT+0300 (Moscow Standard Time)]  Los Angeles FC - Los Angeles Galaxy is not interesting match
+
+
+
+error [Sat Jul 28 2018 00:57:38 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:57:41 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 00:59:35 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 00:59:54 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 01:00:05 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 01:00:11 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 01:03:11 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:03:43 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:04:03 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:06:08 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:07:45 GMT+0300 (Moscow Standard Time)]  parseMatches error:  ReferenceError: photo is not defined
+    at Object.parseMatches (/home/gil/Projects/oddsbot/common/parser.js:26:34)
+error [Sat Jul 28 2018 01:07:45 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:08:29 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:10:16 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:11:48 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+info [Sat Jul 28 2018 01:11:51 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 01:12:40 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:12:55 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+error [Sat Jul 28 2018 01:14:49 GMT+0300 (Moscow Standard Time)]  readFile error:  Error: ENOENT: no such file or directory, open 'data.odb'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+info [Sat Jul 28 2018 01:26:28 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:74:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 01:26:32 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:74:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+info [Sat Jul 28 2018 01:27:10 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'title' of null
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:74:33)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 01:28:28 GMT+0300 (Moscow Standard Time)]  getMatchData Error  TypeError: Converting circular structure to JSON
+    at JSON.stringify (<anonymous>)
+    at Node.<anonymous> (/home/gil/Projects/oddsbot/common/parser.js:197:60)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:182:18
+    at new Promise (<anonymous>)
+    at getMatchData (/home/gil/Projects/oddsbot/common/parser.js:154:12)
+    at Object.parseMatch (/home/gil/Projects/oddsbot/common/parser.js:60:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 01:28:28 GMT+0300 (Moscow Standard Time)]  parseMatch error:  TypeError: Cannot read property 'odds' of undefined
+    at Object.parseMatch (/home/gil/Projects/oddsbot/common/parser.js:62:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 01:28:28 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'blob' of undefined
+    at /home/gil/Projects/oddsbot/consoleApp.js:129:45
+    at new Promise (<anonymous>)
+    at proceedMatch (/home/gil/Projects/oddsbot/consoleApp.js:124:12)
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:34)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+error [Sat Jul 28 2018 01:32:01 GMT+0300 (Moscow Standard Time)]  getMatchData Error  TypeError: Converting circular structure to JSON
+    at JSON.stringify (<anonymous>)
+    at Node.<anonymous> (/home/gil/Projects/oddsbot/common/parser.js:199:60)
+    at initialize.exports.each (/home/gil/Projects/oddsbot/node_modules/cheerio/lib/api/traversing.js:300:24)
+    at /home/gil/Projects/oddsbot/common/parser.js:182:18
+    at new Promise (<anonymous>)
+    at getMatchData (/home/gil/Projects/oddsbot/common/parser.js:154:12)
+    at Object.parseMatch (/home/gil/Projects/oddsbot/common/parser.js:60:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+error [Sat Jul 28 2018 01:32:01 GMT+0300 (Moscow Standard Time)]  parseMatch error:  TypeError: Cannot read property 'odds' of undefined
+    at Object.parseMatch (/home/gil/Projects/oddsbot/common/parser.js:62:24)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+info [Sat Jul 28 2018 01:32:01 GMT+0300 (Moscow Standard Time)]  TypeError: Cannot read property 'blob' of undefined
+    at /home/gil/Projects/oddsbot/consoleApp.js:129:45
+    at new Promise (<anonymous>)
+    at proceedMatch (/home/gil/Projects/oddsbot/consoleApp.js:124:12)
+    at helpers.asyncForEach (/home/gil/Projects/oddsbot/consoleApp.js:77:34)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+
+
+info [Sat Jul 28 2018 01:34:48 GMT+0300 (Moscow Standard Time)]  Globo - Nautico is not interesting match
+
+
+
+info [Sat Jul 28 2018 02:11:31 GMT+0300 (Moscow Standard Time)]  Huachipato - U. Espanola is not interesting match
+info [Sat Jul 28 2018 02:11:35 GMT+0300 (Moscow Standard Time)]  Zacatecas Mineros - Celaya is not interesting match
+info [Sat Jul 28 2018 02:11:39 GMT+0300 (Moscow Standard Time)]  Monarcas - Santos Laguna is not interesting match
+info [Sat Jul 28 2018 02:11:48 GMT+0300 (Moscow Standard Time)]  Paysandu PA - Figueirense is not interesting match
+info [Sat Jul 28 2018 02:12:00 GMT+0300 (Moscow Standard Time)]  Once Caldas - Bucaramanga is not interesting match
+info [Sat Jul 28 2018 02:12:04 GMT+0300 (Moscow Standard Time)]  Dep. Cuenca - U. Catolica is not interesting match
+info [Sat Jul 28 2018 02:12:08 GMT+0300 (Moscow Standard Time)]  Atlante - Correcaminos is not interesting match
+info [Sat Jul 28 2018 02:12:17 GMT+0300 (Moscow Standard Time)]  Puebla - Toluca is not interesting match
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+info [Sat Jul 28 2018 02:20:17 GMT+0300 (Moscow Standard Time)]  Huachipato - U. Espanola is not interesting match
+info [Sat Jul 28 2018 02:20:17 GMT+0300 (Moscow Standard Time)]  Huachipato - U. Espanola is not interesting match
+info [Sat Jul 28 2018 02:20:21 GMT+0300 (Moscow Standard Time)]  Zacatecas Mineros - Celaya is not interesting match
+info [Sat Jul 28 2018 02:20:21 GMT+0300 (Moscow Standard Time)]  Zacatecas Mineros - Celaya is not interesting match
+info [Sat Jul 28 2018 02:20:25 GMT+0300 (Moscow Standard Time)]  Monarcas - Santos Laguna is not interesting match
+info [Sat Jul 28 2018 02:20:25 GMT+0300 (Moscow Standard Time)]  Monarcas - Santos Laguna is not interesting match
+info [Sat Jul 28 2018 02:20:33 GMT+0300 (Moscow Standard Time)]  Paysandu PA - Figueirense is not interesting match
+info [Sat Jul 28 2018 02:20:33 GMT+0300 (Moscow Standard Time)]  Paysandu PA - Figueirense is not interesting match
+info [Sat Jul 28 2018 02:20:46 GMT+0300 (Moscow Standard Time)]  Once Caldas - Bucaramanga is not interesting match
+info [Sat Jul 28 2018 02:20:49 GMT+0300 (Moscow Standard Time)]  Once Caldas - Bucaramanga is not interesting match
+info [Sat Jul 28 2018 02:20:50 GMT+0300 (Moscow Standard Time)]  Dep. Cuenca - U. Catolica is not interesting match
+info [Sat Jul 28 2018 02:20:52 GMT+0300 (Moscow Standard Time)]  Dep. Cuenca - U. Catolica is not interesting match
+info [Sat Jul 28 2018 02:20:56 GMT+0300 (Moscow Standard Time)]  Atlante - Correcaminos is not interesting match
+info [Sat Jul 28 2018 02:20:56 GMT+0300 (Moscow Standard Time)]  Atlante - Correcaminos is not interesting match
+
+
+
+
+
+info [Sat Jul 28 2018 02:21:32 GMT+0300 (Moscow Standard Time)]  Huachipato - U. Espanola is not interesting match
+info [Sat Jul 28 2018 02:21:36 GMT+0300 (Moscow Standard Time)]  Zacatecas Mineros - Celaya is not interesting match
+info [Sat Jul 28 2018 02:21:40 GMT+0300 (Moscow Standard Time)]  Monarcas - Santos Laguna is not interesting match
+info [Sat Jul 28 2018 02:21:48 GMT+0300 (Moscow Standard Time)]  Paysandu PA - Figueirense is not interesting match
+info [Sat Jul 28 2018 02:22:00 GMT+0300 (Moscow Standard Time)]  Once Caldas - Bucaramanga is not interesting match
+info [Sat Jul 28 2018 02:22:04 GMT+0300 (Moscow Standard Time)]  Dep. Cuenca - U. Catolica is not interesting match
+info [Sat Jul 28 2018 02:22:08 GMT+0300 (Moscow Standard Time)]  Atlante - Correcaminos is not interesting match
+info [Sat Jul 28 2018 02:22:16 GMT+0300 (Moscow Standard Time)]  Puebla - Toluca is not interesting match
