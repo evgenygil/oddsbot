@@ -100,7 +100,7 @@ function getMatches() {
                                     xbetBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
                                 });
 
-                                xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span><span>${data.xbet.blob.openOdds.val}</span></div>`;
+                                xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span>&nbsp;<span>${data.xbet.blob.openOdds.val}</span></div>`;
 
                             }
                         }
