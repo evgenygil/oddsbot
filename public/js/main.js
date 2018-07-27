@@ -74,7 +74,7 @@ function getMatches() {
                                     pinnacleBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
                                 });
 
-                                pinnacleBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.pinnacle.blob.openOdds.date}</span><span>${data.pinnacle.blob.openOdds.val}</span></div>`;
+                                pinnacleBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.pinnacle.blob.openOdds.date}</span>&nbsp;|&nbsp;<span>${data.pinnacle.blob.openOdds.val}</span></div>`;
 
                             }
                         }
@@ -87,7 +87,7 @@ function getMatches() {
                                     marathonBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
                                 });
 
-                                marathonBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.marathonbet.blob.openOdds.date}</span><span>${data.marathonbet.blob.openOdds.val}</span></div>`;
+                                marathonBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.marathonbet.blob.openOdds.date}</span>&nbsp;|&nbsp;<span>${data.marathonbet.blob.openOdds.val}</span></div>`;
 
                             }
                         }
@@ -100,7 +100,7 @@ function getMatches() {
                                     xbetBlob += `<div><span>${e.date} / </span><span>${e.val} / </span><span>${e.inc_dec}</span></div>`;
                                 });
 
-                                xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span>&nbsp;<span>${data.xbet.blob.openOdds.val}</span></div>`;
+                                xbetBlob += `<div style="margin-top: 10px; margin-bottom: 10px;"><span><b>OpenOdds: </b></span><span>${data.xbet.blob.openOdds.date}</span>&nbsp;|&nbsp;<span>${data.xbet.blob.openOdds.val}</span></div>`;
 
                             }
                         }
