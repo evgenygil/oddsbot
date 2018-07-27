@@ -183,6 +183,7 @@ function getMatchData($, time) {
                     if ((element.attribs.href).includes('pinnacle')) {
 
                         let divS = $(element).parent().parent().parent().find('td.right.odds');
+                        console.log(JSON.stringify(divS));
                         divS.each(function (i, e) {
                             match.pinnacle.odds.push($(e).text());
                         });

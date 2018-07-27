@@ -61,7 +61,7 @@ db.on('error', function (err) {
 
     let oldlinks = await [];
 
-    await console.log('Start working...');
+    await console.log(moment().format('HH:mm') + ': Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
