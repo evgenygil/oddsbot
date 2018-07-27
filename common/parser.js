@@ -201,7 +201,7 @@ function getMatchData($) {
                         } catch (e) {
                             console.log(e.stack);
                             console.log('Error in hint: ' + divS);
-                            console.log('Element: ' + element.toString());
+                            console.log('Element: ' + JSON.stringify(element));
                         }
                     }
                     if ((element.attribs.href).includes('marathonbet')) {
@@ -219,7 +219,7 @@ function getMatchData($) {
                         } catch (e) {
                             console.log(e.stack);
                             console.log('Error in hint ' + divS);
-                            console.log('Element: ' + element.toString());
+                            console.log('Element: ' + JSON.stringify(element));
 
                         }
                     }
@@ -236,7 +236,8 @@ function getMatchData($) {
                         try {
                             match.xbet.hint = divS[min].attribs.onmouseover;
                         } catch (e) {
-                            logger.error('Error in hint ', e.stack);
+                            console.log('Error in hint ' + divS);
+                            console.log('Element: ' + JSON.stringify(element));
                         }
                     }
                 });
