@@ -126,7 +126,7 @@ function getMatches($) {
         if ($) {
 
             let matches = [];
-            let now = moment();
+            let now = moment().add(7, 'hours');
 
 
             $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
