@@ -61,20 +61,20 @@ async function parseMatch(matchLink, type = 'json', time) {
     if (match.pinnacle.odds.length > 0) {
 
         if (match.pinnacle.hint) {
-            await page.hover('a[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log(e.stack));
+            await page.hover('a[onmouseover="' + match.pinnacle.hint + '"]');
             await page.waitFor(300);
             let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         if (match.marathonbet.hint) {
-            await page.hover('a[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log(e.stack));
+            await page.hover('a[onmouseover="' + match.marathonbet.hint + '"]');
             await page.waitFor(600);
             let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
         if (match.xbet.hint) {
-            await page.hover('a[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log(e.stack));
+            await page.hover('a[onmouseover="' + match.xbet.hint + '"]');
             await page.waitFor(900);
             let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
@@ -125,6 +125,7 @@ function getMatches($) {
         if ($) {
 
             let matches = [];
+            // let now = moment();
             let now = moment().add(7, 'hours');
 
 
@@ -136,6 +137,7 @@ function getMatches($) {
                     let timeMoment = moment((time + ':00'), 'HH:mm:ss a');
                     let duration = timeMoment.diff(now, 'minutes');
                     if (duration > (-1440 + 9) && duration < (-1440 + 181)) {
+                    // if (duration > (9) && duration < (181)) {
                         matches.push({href: href, time: time});
                     }
                 }
