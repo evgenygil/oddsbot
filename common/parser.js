@@ -51,7 +51,6 @@ async function parseMatch(matchLink, type = 'json', time) {
     await page.setViewport({width: 1440, height: 960});
     await page.goto(matchLink).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
     await page.waitForSelector('#odds-data-table');
-    await page.screenshot({path: 'odds-data-table.png'});
 
     let content = await page.evaluate(() => document.body.innerHTML);
 
@@ -180,19 +179,23 @@ function getMatchData($, time) {
                 .find('tbody')
                 .find('a.name2')
                 .each(function (index, element) {
+
                     if ((element.attribs.href).includes('pinnacle')) {
 
                         let divS = $(element).parent().parent().parent().find('td.right.odds');
-                        console.log(JSON.stringify(divS));
                         divS.each(function (i, e) {
                             match.pinnacle.odds.push($(e).text());
                         });
                         match.pinnacle.odds.splice(1, 1);
                         let min = _.indexOf(match.pinnacle.odds, _.min(match.pinnacle.odds));
 
+
                         divS.splice(1, 1);
+
+
                         try {
-                            match.pinnacle.hint = divS[min].attribs.onmouseover;
+                            // match.pinnacle.hint = divS[min].attribs.onmouseover;
+                            match.pinnacle.hint = divS[min].children[0].attribs.onmouseover;
                         } catch (e) {
                             logger.error('Error in hint ', e.stack);
                         }
@@ -208,7 +211,7 @@ function getMatchData($, time) {
 
                         divS.splice(1, 1);
                         try {
-                            match.marathonbet.hint = divS[min].attribs.onmouseover;
+                            match.marathonbet.hint = divS[min].children[0].attribs.onmouseover;
                         } catch (e) {
                             logger.error('Error in hint ', e.stack);
                         }
@@ -224,12 +227,13 @@ function getMatchData($, time) {
 
                         divS.splice(1, 1);
                         try {
-                            match.xbet.hint = divS[min].attribs.onmouseover;
+                            match.xbet.hint = divS[min].children[0].attribs.onmouseover;
                         } catch (e) {
                             logger.error('Error in hint ', e.stack);
                         }
                     }
                 });
+
             resolve(match)
         }
         else {
