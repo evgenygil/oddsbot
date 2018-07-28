@@ -136,7 +136,8 @@ function getMatches($) {
                 if (href.includes('/soccer/') && time.includes(':')) {
                     let timeMoment = moment((time + ':00'), 'HH:mm:ss a');
                     let duration = timeMoment.diff(now, 'minutes');
-                    if (duration > 9 && duration < 581) {
+                    console.log('duration = ' duration);
+                    if (duration > 9 && duration < 181) {
                         matches.push({href: href, time: time});
                     }
                 }
