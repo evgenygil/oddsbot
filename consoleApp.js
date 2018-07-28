@@ -79,8 +79,6 @@ db.on('error', function (err) {
 
             let entMatch = await proceedMatch(match);
 
-            await console.log('Filtered match = ' + JSON.stringify(entMatch));
-
             if (entMatch !== undefined) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
                 if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
