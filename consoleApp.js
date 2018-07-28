@@ -89,6 +89,9 @@ db.on('error', function (err) {
 
         await oldlinks.push(link.href);
 
+        timeout(3000);
+
+
     });
 
     await helpers.writeFile('data.odb', oldlinks);
@@ -102,7 +105,7 @@ async function sendToTelegram(match) {
     if (match) {
 
         let data =
-            moment(Date.parse(match.date)).format('HH:mm') + ': *' + match.league + ' | ' + match.title + '* \n' +
+            moment((match.date + ':00'), 'HH:mm:ss a').format('HH:mm') + ': *' + match.league + ' | ' + match.title + '* \n' +
             'Pinnacle: delta = ' + match.pinnacle.delta + ', odds: ' + (match.pinnacle.odds).join(', ') + '\n' +
             '1Xbet: delta = ' + match.xbet.delta + ', odds: ' + (match.xbet.odds).join(', ') + '\n' +
             'Marathonbet: delta = ' + match.marathonbet.delta + ', odds: ' + (match.marathonbet.odds).join(', ') + '\n';

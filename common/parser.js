@@ -58,8 +58,6 @@ async function parseMatch(matchLink, type = 'json', time) {
 
     let match = await getMatchData($, time).catch((e) => logger.error('getMatchData Error ', e.stack));
 
-    console.log(match);
-
     if (match.pinnacle.odds.length > 0) {
 
         if (match.pinnacle.hint) {
