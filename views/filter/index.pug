@@ -13,8 +13,8 @@ block content
                     div.form-group-sm
                         label Type:
                         select.form-control(name='type')
-                            option(value="1") Country
-                            option(value="2") Championship
+                            //option(value="1") Country
+                            //option(value="2") Championship
                             option(value="3") Country/Championship
                 div.col-sm-4
                     div.form-group-sm
@@ -41,12 +41,12 @@ block content
                         li.list-group-item
                             i.pull-right.strategy-date.hint #{filter.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
                             case parseInt(filter.type)
-                                when 1
-                                    span
-                                      b Country
-                                when 2
-                                    span
-                                      b Championship
+                                //when 1
+                                //    span
+                                //      b Country
+                                //when 2
+                                //    span
+                                //      b Championship
                                 when 3
                                     span
                                       b Country/Championship
