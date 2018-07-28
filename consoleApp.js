@@ -61,11 +61,11 @@ db.on('error', function (err) {
 
     let oldlinks = await [];
 
-    await console.log(moment().format('Y-M-D HH:mm') + ': Start working...');
+    await console.log(moment().add(7, 'hours').format('Y-M-D HH:mm') + ': Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
-    await console.log(moment().format('Y-M-D HH:mm') + ': Total matches to parse: ' + matches.length);
+    await console.log(moment().add(7, 'hours').format('Y-M-D HH:mm') + ': Total matches to parse: ' + matches.length);
 
     let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
     let oldMatches = await matchesFile.split(',');
