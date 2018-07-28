@@ -59,6 +59,8 @@ db.on('error', function (err) {
 
 (async () => {
 
+    await Log.collection.drop();
+
     let oldlinks = await [];
 
     await console.log(moment().add(7, 'hours').format('Y-M-D HH:mm') + ': Start working...');
