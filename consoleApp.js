@@ -106,7 +106,7 @@ async function sendToTelegram(match) {
     if (match) {
 
         let data =
-            moment((match.date + ':00'), 'HH:mm:ss a').format('HH:mm') + ': *' + match.league + ' | ' + match.title + '* \n' +
+            match.date + ': *' + match.league + ' | ' + match.title + '* \n' +
             'Pinnacle: delta = ' + match.pinnacle.delta + ', odds: ' + (match.pinnacle.odds).join(', ') + '\n' +
             '1Xbet: delta = ' + match.xbet.delta + ', odds: ' + (match.xbet.odds).join(', ') + '\n' +
             'Marathonbet: delta = ' + match.marathonbet.delta + ', odds: ' + (match.marathonbet.odds).join(', ') + '\n';
