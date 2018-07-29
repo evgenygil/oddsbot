@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 let Log = require('../models/log');
 
@@ -14,7 +15,7 @@ router.get('/all', function (req, res) {
 
 router.get('/all/page/:id', function (req, res) {
 
-    Log.paginate({}, {page: req.params.id, sort: '-createdAt'}).then(function (result, err) {
+    Log.paginate({}, {page: req.params.id}).then(function (result, err) {
         if (!err) {
 
             let pagesarr = [];
@@ -23,7 +24,9 @@ router.get('/all/page/:id', function (req, res) {
             }
 
             res.render('logs/index', {
-                logs: result.docs,
+                logs: result.docs.sort(function (left, right) {
+                    return moment(left.timeStamp).diff(moment(right.timeStamp))
+                }),
                 pagesarr: pagesarr,
                 page_id: req.params.id
             });

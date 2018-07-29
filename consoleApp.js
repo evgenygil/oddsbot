@@ -61,18 +61,16 @@ db.on('error', function (err) {
 
     await Log.collection.drop();
 
-    let oldlinks = await [];
+    // let oldlinks = await [];
 
-    await console.log(moment().add(7, 'hours').format('Y-M-D HH:mm') + ': Start working...');
-    // await console.log(moment().format('Y-M-D HH:mm') + ': Start working...');
+    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
-    await console.log(moment().add(7, 'hours').format('Y-M-D HH:mm') + ': Total matches to parse: ' + matches.length);
-    // await console.log(moment().format('Y-M-D HH:mm') + ': Total matches to parse: ' + matches.length);
+    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
 
-    let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
-    let oldMatches = await matchesFile.split(',');
+    // let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
+    // let oldMatches = await matchesFile.split(',');
 
     await helpers.asyncForEach(matches, async (link) => {
         let match = await parser.parseMatch(config.baseUrl + link.href, 'json', link.time).catch((e) => logger.error('parseMatch error: ', e.stack));
@@ -83,9 +81,9 @@ db.on('error', function (err) {
 
             if (entMatch !== undefined) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-                if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
+                // if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
-                }
+                // }
             }
         }
 
@@ -96,8 +94,9 @@ db.on('error', function (err) {
 
     });
 
-    await helpers.writeFile('data.odb', oldlinks);
+    // await helpers.writeFile('data.odb', oldlinks);
 
+    await process.exit();
 
 })();
 

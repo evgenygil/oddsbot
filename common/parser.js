@@ -24,7 +24,6 @@ async function parseMatches() {
     await page.waitFor(3000);
     await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
     await page.waitFor(3000);
-    await page.screenshot({path: 'set-timezone.png'});
 
     let content = await page.evaluate(() => document.body.innerHTML);
 
@@ -61,26 +60,28 @@ async function parseMatch(matchLink, type = 'json', time) {
     if (match.pinnacle.odds.length > 0) {
 
         if (match.pinnacle.hint) {
-            await page.hover('a[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log('pinnacle hint empty'));
-            await page.waitFor(300);
+            await page.hover('[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log('pinnacle hint empty'));
+            await page.waitFor(200);
             let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         if (match.marathonbet.hint) {
-            await page.hover('a[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log('marathonbet hint empty'));
+            await page.hover('[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log('marathonbet hint empty'));
             await page.waitFor(600);
             let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
         if (match.xbet.hint) {
-            await page.hover('a[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log('xbet hint empty'));
-            await page.waitFor(900);
+            await page.hover('[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log('xbet a hint empty'));
+            await page.waitFor(1000);
             let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         await browser.close();
+
+        await match.link = matchLink;
 
         return match;
     } else {
@@ -125,8 +126,7 @@ function getMatches($) {
         if ($) {
 
             let matches = [];
-            // let now = moment();
-            let now = moment().add(7, 'hours');
+            let now = moment().add(config.timeCorrect, 'hours');
 
 
             $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
@@ -136,8 +136,6 @@ function getMatches($) {
                 if (href.includes('/soccer/') && time.includes(':')) {
                     let timeMoment = moment((time + ':00'), 'HH:mm:ss a');
                     let duration = timeMoment.diff(now, 'minutes');
-                    // console.log(duration);
-                    // if (duration > (-1440 + 9) && duration < (-1440 + 181)) {
                     if (duration > (9) && duration < (181)) {
                         matches.push({href: href, time: time});
                     }
@@ -161,8 +159,9 @@ function getMatchData($, time) {
 
             let match = {
                 title: $('div#col-content > h1').text(),
-                date: time,
+                date: moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY') + ' ' + time,
                 league: $(breadcrumb[2]).text() + '/' + $(breadcrumb[3]).text(),
+                link: '',
                 pinnacle: {
                     odds: [],
                     hint: false,
@@ -191,12 +190,10 @@ function getMatchData($, time) {
                         });
                         match.pinnacle.odds.splice(1, 1);
                         let min = _.indexOf(match.pinnacle.odds, _.min(match.pinnacle.odds));
-
-
                         divS.splice(1, 1);
-
-
                         try {
+                            // here it can broken by html
+
                             // match.pinnacle.hint = divS[min].attribs.onmouseover;
                             match.pinnacle.hint = divS[min].children[0].attribs.onmouseover;
                         } catch (e) {
