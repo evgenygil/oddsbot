@@ -21,9 +21,9 @@ async function parseMatches() {
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
     await page.waitForSelector('#table-matches');
     await page.click('a[id="user-header-timezone-expander"]').catch((e) => console.log(e.stack));
-    await page.waitFor(3000);
+    await page.waitFor(2000);
     await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
-    await page.waitFor(3000);
+    await page.waitFor(2000);
 
     let content = await page.evaluate(() => document.body.innerHTML);
 
