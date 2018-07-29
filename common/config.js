@@ -5,6 +5,6 @@ module.exports = {
     baseUrl: 'http://oddsportal.com',
     soccerUrl : 'http://oddsportal.com/matches/soccer/',
     telegramToken : '555895348:AAEsefhsqSY_EAIHIeYViyWwLFjXXZA9puk',
-    timeCorrect: 0
+    timeCorrect: 7
 };
 
