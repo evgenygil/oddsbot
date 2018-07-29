@@ -1,0 +1,118 @@
+extends ../layout
+
+block content
+    h2 Archive
+    div#content-tb.row
+        div.col-lg-10
+            div
+                span Pages: &nbsp;
+                if (page_id > pagesarr[0])
+                    a(href='/archives/all/page/' + (parseInt(page_id) - 1)): span.hint <
+                    span &nbsp;&nbsp;
+                else
+                    span.hint <
+                    span &nbsp;&nbsp;
+                each page, i in pagesarr
+                    if (page == page_id)
+                        span: b #{page}&nbsp;
+                    else
+                        span: a(href='/archives/all/page/' + page)= page
+                        span &nbsp;
+                if (page_id < pagesarr.length)
+                    a(href='/archives/all/page/' + (parseInt(page_id) + 1)): span.hint >
+                else
+                    span.hint >
+            hr
+            ul.list-group
+            each log, i in logs
+                li.list-group.list-unstyled(style='border-bottom: 1px dotted #ABABAB')
+                    i.pull-right.post-date #{log.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+                    h4
+                        a(href=log.link)
+                            b #{log.title}
+                    p Match starts: #{log.date}
+                    p League: #{log.league}
+                    //div.row
+                    //    div.col-lg-4
+                    //        h4
+                    //            b Pinnacle
+                    //        p Odds: #{log.pinnacle.odds}
+                    //
+                    //        if (log.pinnacle.blob)
+                    //            each item in log.pinnacle.blob.items
+                    //                div
+                    //                    span #{item.date} /
+                    //                    span &nbsp;#{item.val} /
+                    //                    span &nbsp;#{item.inc_dec}
+                    //            div.margin-top-20.margin-bottom-10
+                    //                span
+                    //                    b OpenOdds:&nbsp;
+                    //                span #{log.pinnacle.blob.openOdds.date} &nbsp; / &nbsp;
+                    //                span #{log.pinnacle.blob.openOdds.val}
+                    //            div.margin-top-20.margin-bottom-10
+                    //                span
+                    //                    b Delta:&nbsp;
+                    //                span #{log.pinnacle.delta}
+                    //    if (log.marathonbet.odds.length > 0)
+                    //        div.col-lg-4
+                    //            h4
+                    //                b Maranthonbet
+                    //            p Odds: #{log.marathonbet.odds}
+                    //
+                    //            if (log.marathonbet.blob)
+                    //                each item in log.marathonbet.blob.items
+                    //                    div
+                    //                        span #{item.date} /
+                    //                            span &nbsp;#{item.val} /
+                    //                            span &nbsp;#{item.inc_dec}
+                    //                div.margin-top-20.margin-bottom-10
+                    //                    span
+                    //                        b OpenOdds:&nbsp;
+                    //                    span #{log.marathonbet.blob.openOdds.date} &nbsp; / &nbsp;
+                    //                    span #{log.marathonbet.blob.openOdds.val}
+                    //                div.margin-top-20.margin-bottom-10
+                    //                    span
+                    //                        b Delta:&nbsp;
+                    //                    span #{log.marathonbet.delta}
+                    //    if (log.xbet.odds.length > 0)
+                    //        div.col-lg-4
+                    //            h4
+                    //                b 1Xbet
+                    //            p Odds: #{log.xbet.odds}
+                    //
+                    //            if (log.xbet.blob)
+                    //                each item in log.xbet.blob.items
+                    //                    div
+                    //                        span #{item.date} /
+                    //                            span &nbsp;#{item.val} /
+                    //                            span &nbsp;#{item.inc_dec}
+                    //                div.margin-top-20.margin-bottom-10
+                    //                    span
+                    //                        b OpenOdds:&nbsp;
+                    //                    span #{log.xbet.blob.openOdds.date} &nbsp; / &nbsp;
+                    //                    span #{log.xbet.blob.openOdds.val}
+                    //                div.margin-top-20.margin-bottom-10
+                    //                    span
+                    //                        b Delta:&nbsp;
+                    //                    span #{log.xbet.delta}
+                    p Created at #{log.createdAt}
+
+            div
+                span Pages: &nbsp;
+                if (page_id > pagesarr[0])
+                    a(href='/archives/all/page/' + (parseInt(page_id) - 1)): span.hint <
+                    span &nbsp;
+                else
+                    span.hint <
+                    span &nbsp;&nbsp;
+                each page, i in pagesarr
+                    if (page == page_id)
+                        span: b #{page}&nbsp;
+                    else
+                        span: a(href='/archives/all/page/' + page)= page
+                        span &nbsp;
+                if (page_id < pagesarr.length)
+                    a(href='/archives/all/page/' + (parseInt(page_id) + 1)): span.hint >
+                else
+                    span.hint >
+        div.col-lg-2

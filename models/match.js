@@ -9,8 +9,8 @@ mongoosePaginate.paginate.options = {
     limit: 5
 };
 
-// Log Schema
-let logSchema = mongoose.Schema({
+// Match Schema
+let matchSchema = mongoose.Schema({
         title: {
             type: String,
             required: true,
@@ -20,6 +20,10 @@ let logSchema = mongoose.Schema({
             required: true
         },
         league: {
+            type: String,
+            required: true
+        },
+        link: {
             type: String,
             required: true
         },
@@ -37,15 +41,20 @@ let logSchema = mongoose.Schema({
         },
         comment: {
             type: String
+        },
+        archive: {
+            type: Boolean,
+            required: true,
+            default: false
         }
     },
     {
         timestamps: true
     });
 
-logSchema.index({title: 1, matchDate: 1}, {unique: true});
+matchSchema.index({title: 1, matchDate: 1}, {unique: true});
 
-logSchema.plugin(uniqueValidator);
-logSchema.plugin(mongoosePaginate);
+matchSchema.plugin(uniqueValidator);
+matchSchema.plugin(mongoosePaginate);
 
-let Log = module.exports = mongoose.model('Log', logSchema);
+let Match = module.exports = mongoose.model('Match', matchSchema);

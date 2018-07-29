@@ -17,6 +17,7 @@ const config = require('./common/db');
 const indexRouter = require('./routes/index');
 const monitorRouter = require('./routes/monitor');
 const logsRouter = require('./routes/logs');
+const archivesRouter = require('./routes/archives');
 const filtersRouter = require('./routes/filters');
 const settingsRouter = require('./routes/settings');
 
@@ -64,6 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/monitor', monitorRouter);
 app.use('/logs', logsRouter);
+app.use('/archives', archivesRouter);
 app.use('/filters', filtersRouter);
 app.use('/settings', settingsRouter);
 

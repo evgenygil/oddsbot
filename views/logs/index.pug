@@ -1,52 +1,63 @@
 extends ../layout
 
 block content
-        h2 Matches log
-        div.row
-            div.col-lg-10
-                div
-                    span Pages: &nbsp;
-                    if (page_id > pagesarr[0])
-                        a(href='/logs/all/page/' + (parseInt(page_id) - 1)): span.hint <
-                        span &nbsp;&nbsp;
+    h2 Matches log
+    div
+        button#stop.btn.btn-sm.btn-danger Stop refresh every minute
+    br
+    div#content-tb.row
+        div.col-lg-10
+            div
+                span Pages: &nbsp;
+                if (page_id > pagesarr[0])
+                    a(href='/logs/all/page/' + (parseInt(page_id) - 1)): span.hint <
+                    span &nbsp;&nbsp;
+                else
+                    span.hint <
+                    span &nbsp;&nbsp;
+                each page, i in pagesarr
+                    if (page == page_id)
+                        span: b #{page}&nbsp;
                     else
-                        span.hint(style='color:lightgray') <
-                        span &nbsp;&nbsp;
-                    each page, i in pagesarr
-                        if (page == page_id)
-                            span: b #{page}&nbsp;
-                        else
-                            span: a(href='/logs/all/page/' + page)= page
-                            span &nbsp;
-                    if (page_id < pagesarr.length)
-                        a(href='/logs/all/page/' + (parseInt(page_id) + 1)): span.hint >
-                    else
-                        span.hint(style='color:lightgray') >
-                hr
-                ul.list-group
-                each log, i in logs
-                    li.list-group.list-unstyled(style='border-bottom: 1px dotted #ABABAB')
-                        i.pull-right.post-date #{log.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
-                        h3: b #{log.title}
-                        p Match starts: #{log.date}
-                        p League: #{log.league}
-                        div.row
-                            div.col-lg-4
-                                h4
-                                    b Pinnacle
-                                p Odds: #{log.pinnacle.odds}
+                        span: a(href='/logs/all/page/' + page)= page
+                        span &nbsp;
+                if (page_id < pagesarr.length)
+                    a(href='/logs/all/page/' + (parseInt(page_id) + 1)): span.hint >
+                else
+                    span.hint >
+            hr
+            ul.list-group
+            each log, i in logs
+                li.list-group.list-unstyled(style='border-bottom: 1px dotted #ABABAB')
+                    i.pull-right.post-date #{log.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
+                    h3
+                        a(href=log.link)
+                            b #{log.title}
+                        button.btn.btn-warning.btn-sm.margin-l-20.archive-btn(style='margin-top: -4px', x-target=log._id) To archive
+                    p Match starts: #{log.date}
+                    p League: #{log.league}
+                    div.row
+                        div.col-lg-4
+                            h4
+                                b Pinnacle
+                            p Odds: #{log.pinnacle.odds}
 
-                                if (log.pinnacle.blob)
-                                    each item in log.pinnacle.blob.items
-                                        div
-                                            span #{item.date} /
-                                            span &nbsp;#{item.val} /
-                                            span &nbsp;#{item.inc_dec}
-                                    div.margin-top-20.margin-bottom-10
-                                        span
-                                            b OpenOdds:
-                                        span #{log.pinnacle.blob.openOdds.date}
-                                        span #{log.pinnacle.blob.openOdds.val}
+                            if (log.pinnacle.blob)
+                                each item in log.pinnacle.blob.items
+                                    div
+                                        span #{item.date} /
+                                        span &nbsp;#{item.val} /
+                                        span &nbsp;#{item.inc_dec}
+                                div.margin-top-20.margin-bottom-10
+                                    span
+                                        b OpenOdds:&nbsp;
+                                    span #{log.pinnacle.blob.openOdds.date} &nbsp; / &nbsp;
+                                    span #{log.pinnacle.blob.openOdds.val}
+                                div.margin-top-20.margin-bottom-10
+                                    span
+                                        b Delta:&nbsp;
+                                    span #{log.pinnacle.delta}
+                        if (log.marathonbet.odds.length > 0)
                             div.col-lg-4
                                 h4
                                     b Maranthonbet
@@ -60,9 +71,14 @@ block content
                                                 span &nbsp;#{item.inc_dec}
                                     div.margin-top-20.margin-bottom-10
                                         span
-                                            b OpenOdds:
-                                        span #{log.marathonbet.blob.openOdds.date}
+                                            b OpenOdds:&nbsp;
+                                        span #{log.marathonbet.blob.openOdds.date} &nbsp; / &nbsp;
                                         span #{log.marathonbet.blob.openOdds.val}
+                                    div.margin-top-20.margin-bottom-10
+                                        span
+                                            b Delta:&nbsp;
+                                        span #{log.marathonbet.delta}
+                        if (log.xbet.odds.length > 0)
                             div.col-lg-4
                                 h4
                                     b 1Xbet
@@ -76,41 +92,61 @@ block content
                                                 span &nbsp;#{item.inc_dec}
                                     div.margin-top-20.margin-bottom-10
                                         span
-                                            b OpenOdds:
-                                        span #{log.xbet.blob.openOdds.date}
+                                            b OpenOdds:&nbsp;
+                                        span #{log.xbet.blob.openOdds.date} &nbsp; / &nbsp;
                                         span #{log.xbet.blob.openOdds.val}
+                                    div.margin-top-20.margin-bottom-10
+                                        span
+                                            b Delta:&nbsp;
+                                        span #{log.xbet.delta}
+                    p Created at #{log.createdAt}
+                    //if (user)
+                    //    if (log.subscribe_only)
+                    //        if (user.status > 1)
+                    //            span.glyphicon.glyphicon-star(style='color: gold; font-size: 10px; position: static; opacity: 0.8;') &nbsp;
+                    //            a(href="/logs/view/" + log._id) Learn more...
+                    //        else
+                    //            span.glyphicon.glyphicon-star(style='color: #7575a3; font-size: 10px; position: static; opacity: 0.8;') &nbsp;
+                    //            span.hint-red Additional text allows only for subscribers
+                    //    else
+                    //        a(href="/logs/view/" + log._id) Learn more...
+                    //else
+                    //    span.label.label-danger: a(href='/login').tologin Please Login to view more...
+                    //p
 
-                        p Created at #{log.createdAt}
-                        //if (user)
-                        //    if (log.subscribe_only)
-                        //        if (user.status > 1)
-                        //            span.glyphicon.glyphicon-star(style='color: gold; font-size: 10px; position: static; opacity: 0.8;') &nbsp;
-                        //            a(href="/logs/view/" + log._id) Learn more...
-                        //        else
-                        //            span.glyphicon.glyphicon-star(style='color: #7575a3; font-size: 10px; position: static; opacity: 0.8;') &nbsp;
-                        //            span.hint-red Additional text allows only for subscribers
-                        //    else
-                        //        a(href="/logs/view/" + log._id) Learn more...
-                        //else
-                        //    span.label.label-danger: a(href='/login').tologin Please Login to view more...
-                        //p
-
-                div
-                    span Pages: &nbsp;
-                    if (page_id > pagesarr[0])
-                        a(href='/logs/all/page/' + (parseInt(page_id) - 1)): span.hint <
+            div
+                span Pages: &nbsp;
+                if (page_id > pagesarr[0])
+                    a(href='/logs/all/page/' + (parseInt(page_id) - 1)): span.hint <
+                    span &nbsp;
+                else
+                    span.hint <
+                    span &nbsp;&nbsp;
+                each page, i in pagesarr
+                    if (page == page_id)
+                        span: b #{page}&nbsp;
+                    else
+                        span: a(href='/logs/all/page/' + page)= page
                         span &nbsp;
-                    else
-                        span.hint(style='color:lightgray') <
-                        span &nbsp;&nbsp;
-                    each page, i in pagesarr
-                        if (page == page_id)
-                            span: b #{page}&nbsp;
-                        else
-                            span: a(href='/logs/all/page/' + page)= page
-                            span &nbsp;
-                    if (page_id < pagesarr.length)
-                        a(href='/logs/all/page/' + (parseInt(page_id) + 1)): span.hint >
-                    else
-                        span.hint(style='color:lightgray') >
-            div.col-lg-2
+                if (page_id < pagesarr.length)
+                    a(href='/logs/all/page/' + (parseInt(page_id) + 1)): span.hint >
+                else
+                    span.hint >
+        div.col-lg-2
+
+    script.
+        window.onload = function () {
+            var refresher = null,
+                refresh_interval = 60000;
+
+            refresher = setInterval(function () {
+                $('#content-tb').load(document.URL +  ' #content-tb');
+            }, refresh_interval);
+
+
+            $("#stop").click(function () {
+                clearInterval(refresher);
+                refresher = null;
+                $(this).prop('disabled', true)
+            });
+        }

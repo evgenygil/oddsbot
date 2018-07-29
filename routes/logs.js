@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
+const logger = require('logger').createLogger('./logs/oddswork.log');
 
-let Log = require('../models/log');
+let Match = require('../models/match');
 
 
 router.get('/', function (req, res, next) {
@@ -14,7 +16,7 @@ router.get('/all', function (req, res) {
 
 router.get('/all/page/:id', function (req, res) {
 
-    Log.paginate({}, {page: req.params.id, sort: '-createdAt'}).then(function (result, err) {
+    Match.paginate({archive: false}, {page: req.params.id}).then(function (result, err) {
         if (!err) {
 
             let pagesarr = [];
@@ -23,7 +25,9 @@ router.get('/all/page/:id', function (req, res) {
             }
 
             res.render('logs/index', {
-                logs: result.docs,
+                logs: result.docs.sort(function (left, right) {
+                    return moment(left.timeStamp).diff(moment(right.timeStamp))
+                }),
                 pagesarr: pagesarr,
                 page_id: req.params.id
             });
@@ -33,6 +37,16 @@ router.get('/all/page/:id', function (req, res) {
             res.end('Error');
         }
     });
+});
+
+router.post('/disable/:id', function (req, res) {
+    Match.findByIdAndUpdate(req.params.id, {archive: true}, function (err) {
+        if (err) {
+            logger.error('Failed to set archive.')
+        } else {
+            res.sendStatus(200);
+        }
+    })
 });
 
 module.exports = router;

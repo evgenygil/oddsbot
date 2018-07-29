@@ -1,10 +1,15 @@
 {
   "apps": [
     {
-      "name": "ODDSBOT",
+      "name": "ODDSBOT web",
       "script": "./bin/www",
-      "instances": "-1",
-      "exec_mode": "cluster"
+      "instances": "1",
     },
+    {
+      "name": "ODDSBOT console",
+      "script": "./consoleApp.js",
+      "instances": "1",
+      "cron_restart": "*/10 * * * *",
+    }
   ]
 }

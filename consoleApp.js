@@ -9,7 +9,7 @@ const telegram = require('telegram-bot-api');
 const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
 
-let Log = require('./models/log');
+let Match = require('./models/match');
 
 let tgApi = new telegram({token: config.telegramToken});
 
@@ -22,21 +22,58 @@ db.on('error', function (err) {
     console.log(err);
 });
 
+// (async () => {
+//
+//     logger.info('Start working...');
+//
+//     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
+//
+//     logger.info('Total matches to parse: ' + matches.length);
+//     console.log('Total matches to parse: ' + matches.length);
+//
+//     let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
+//     let oldMatches = await matchesFile.split(',');
+//
+//     await helpers.asyncForEach(matches, async (link) => {
+//         let match = await parser.parseMatch(config.baseUrl + link, 'json').catch((e) => logger.error('parseMatch error: ', e.stack));
+//
+//         if (match !== undefined && match !== null) {
+//
+//             let entMatch = await proceedMatch(match);
+//
+//             if (entMatch !== undefined) {
+//                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
+//                 if ((oldMatches.length > 0) && (oldMatches.indexOf(link) < 0)) {
+//                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
+//                 }
+//             }
+//         }
+//
+//         timeout(3000);
+//     });
+//
+//     await helpers.writeFile('data.odb', matches);
+//
+//
+// })();
+
 (async () => {
 
-    logger.info('Start working...');
-    console.log('Start working...');
+    // await Match.collection.drop();
+
+    // let oldlinks = await [];
+
+    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
-    logger.info('Total matches to parse: ' + matches.length);
-    console.log('Total matches to parse: ' + matches.length);
+    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
 
-    let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
-    let oldMatches = await matchesFile.split(',');
+    // let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
+    // let oldMatches = await matchesFile.split(',');
 
     await helpers.asyncForEach(matches, async (link) => {
-        let match = await parser.parseMatch(config.baseUrl + link, 'json').catch((e) => logger.error('parseMatch error: ', e.stack));
+        let match = await parser.parseMatch(config.baseUrl + link.href, 'json', link.time).catch((e) => logger.error('parseMatch error: ', e.stack));
 
         if (match !== undefined && match !== null) {
 
@@ -44,17 +81,22 @@ db.on('error', function (err) {
 
             if (entMatch !== undefined) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-                if ((oldMatches.length > 0) && (oldMatches.indexOf(link) < 0)) {
+                // if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
-                }
+                // }
             }
         }
 
+        await oldlinks.push(link.href);
+
         timeout(3000);
+
+
     });
 
-    await helpers.writeFile('data.odb', matches);
+    // await helpers.writeFile('data.odb', oldlinks);
 
+    await process.exit();
 
 })();
 
@@ -64,7 +106,7 @@ async function sendToTelegram(match) {
     if (match) {
 
         let data =
-            moment(Date.parse(match.date)).format('HH:mm') + ': *' + match.league + ' | ' + match.title + '* \n' +
+            moment((match.date + ':00'), 'HH:mm:ss a').format('HH:mm') + ': *' + match.league + ' | ' + match.title + '* \n' +
             'Pinnacle: delta = ' + match.pinnacle.delta + ', odds: ' + (match.pinnacle.odds).join(', ') + '\n' +
             '1Xbet: delta = ' + match.xbet.delta + ', odds: ' + (match.xbet.odds).join(', ') + '\n' +
             'Marathonbet: delta = ' + match.marathonbet.delta + ', odds: ' + (match.marathonbet.odds).join(', ') + '\n';
@@ -95,16 +137,14 @@ async function proceedMatch(match) {
             let delta_xbet = (match.xbet.blob) ? match.xbet.blob.items[0].val - match.xbet.blob.openOdds.val : 0;
             let delta_mar = (match.marathonbet.blob) ? match.marathonbet.blob.items[0].val - match.marathonbet.blob.openOdds.val : 0;
 
-            let varDate = Date.parse(match.date);
-            let now = new Date();
-
-            if ((delta_pin >= 0.09 || delta_xbet >= 0.09 || delta_mar >= 0.09) && ((varDate - now) < 10800) && (varDate > now)) {
+            if ((delta_pin >= 0.09 || delta_xbet >= 0.09 || delta_mar >= 0.09)) {
                 match.pinnacle.delta = Math.round(delta_pin * 100) / 100;
                 match.xbet.delta = Math.round(delta_xbet * 100) / 100;
                 match.marathonbet.delta = Math.round(delta_mar * 100) / 100;
                 resolve(match);
             } else {
                 logger.info(match.title + ' is not interesting match');
+                console.log(match.title + ' is not interesting match');
                 reject(false);
             }
 
@@ -117,10 +157,11 @@ async function proceedMatch(match) {
 
 async function saveToLog(entity) {
 
-    let logEntity = await new Log();
+    let logEntity = await new Match();
     logEntity.title = await entity.title;
     logEntity.league = await entity.league;
-    logEntity.date = Date.parse(await entity.date);
+    logEntity.link = await entity.link;
+    logEntity.date = await entity.date;
     logEntity.pinnacle = await entity.pinnacle;
     logEntity.marathonbet = await entity.marathonbet;
     logEntity.xbet = await entity.xbet;
