@@ -9,7 +9,7 @@ const telegram = require('telegram-bot-api');
 const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
 
-let Log = require('./models/log');
+let Log = require('./models/match');
 
 let tgApi = new telegram({token: config.telegramToken});
 

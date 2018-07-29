@@ -28,6 +28,22 @@ function refreshMatches() {
     });
 }
 
+$('.archive-btn').click(function (e) {
+    let target = $(e.target);
+    if (target.attr('x-target').length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: '/logs/disable/' + target.attr('x-target'),
+            success: function (data) {
+                $(target).parent().parent().hide();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+});
+
 function getMatches() {
 
     $('#loading-img').fadeIn();

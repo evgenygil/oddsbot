@@ -81,7 +81,7 @@ async function parseMatch(matchLink, type = 'json', time) {
 
         await browser.close();
 
-        await match.link = matchLink;
+        match.link = await matchLink;
 
         return match;
     } else {

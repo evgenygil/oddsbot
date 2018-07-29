@@ -6,11 +6,11 @@ let uniqueValidator = require('mongoose-unique-validator');
 
 mongoosePaginate.paginate.options = {
     lean: true,
-    limit: 20
+    limit: 5
 };
 
-// Archive Schema
-let archiveSchema = mongoose.Schema({
+// Match Schema
+let matchSchema = mongoose.Schema({
         title: {
             type: String,
             required: true,
@@ -20,6 +20,10 @@ let archiveSchema = mongoose.Schema({
             required: true
         },
         league: {
+            type: String,
+            required: true
+        },
+        link: {
             type: String,
             required: true
         },
@@ -37,15 +41,20 @@ let archiveSchema = mongoose.Schema({
         },
         comment: {
             type: String
+        },
+        archive: {
+            type: Boolean,
+            required: true,
+            default: false
         }
     },
     {
         timestamps: true
     });
 
-archiveSchema.index({title: 1, matchDate: 1}, {unique: true});
+matchSchema.index({title: 1, matchDate: 1}, {unique: true});
 
-archiveSchema.plugin(uniqueValidator);
-archiveSchema.plugin(mongoosePaginate);
+matchSchema.plugin(uniqueValidator);
+matchSchema.plugin(mongoosePaginate);
 
-let Log = module.exports = mongoose.model('Archive', archiveSchema);
+let Match = module.exports = mongoose.model('Match', matchSchema);

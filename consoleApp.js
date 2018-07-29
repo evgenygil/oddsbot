@@ -9,7 +9,7 @@ const telegram = require('telegram-bot-api');
 const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
 
-let Log = require('./models/log');
+let Match = require('./models/match');
 
 let tgApi = new telegram({token: config.telegramToken});
 
@@ -59,7 +59,7 @@ db.on('error', function (err) {
 
 (async () => {
 
-    await Log.collection.drop();
+    // await Match.collection.drop();
 
     // let oldlinks = await [];
 
@@ -82,7 +82,7 @@ db.on('error', function (err) {
             if (entMatch !== undefined) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
                 // if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
-                    await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
+                //     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
                 // }
             }
         }
@@ -157,9 +157,10 @@ async function proceedMatch(match) {
 
 async function saveToLog(entity) {
 
-    let logEntity = await new Log();
+    let logEntity = await new Match();
     logEntity.title = await entity.title;
     logEntity.league = await entity.league;
+    logEntity.link = await entity.link;
     logEntity.date = await entity.date;
     logEntity.pinnacle = await entity.pinnacle;
     logEntity.marathonbet = await entity.marathonbet;

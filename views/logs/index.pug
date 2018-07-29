@@ -33,7 +33,7 @@ block content
                     h3
                         a(href=log.link)
                             b #{log.title}
-                        button.btn.btn-warning.btn-sm.margin-l-20(style='margin-top: -4px') To archive
+                        button.btn.btn-warning.btn-sm.margin-l-20.archive-btn(style='margin-top: -4px', x-target=log._id) To archive
                     p Match starts: #{log.date}
                     p League: #{log.league}
                     div.row
@@ -50,7 +50,7 @@ block content
                                         span &nbsp;#{item.inc_dec}
                                 div.margin-top-20.margin-bottom-10
                                     span
-                                        b OpenOdds:
+                                        b OpenOdds:&nbsp;
                                     span #{log.pinnacle.blob.openOdds.date} &nbsp; / &nbsp;
                                     span #{log.pinnacle.blob.openOdds.val}
                                 div.margin-top-20.margin-bottom-10
@@ -71,7 +71,7 @@ block content
                                                 span &nbsp;#{item.inc_dec}
                                     div.margin-top-20.margin-bottom-10
                                         span
-                                            b OpenOdds:
+                                            b OpenOdds:&nbsp;
                                         span #{log.marathonbet.blob.openOdds.date} &nbsp; / &nbsp;
                                         span #{log.marathonbet.blob.openOdds.val}
                                     div.margin-top-20.margin-bottom-10
@@ -92,7 +92,7 @@ block content
                                                 span &nbsp;#{item.inc_dec}
                                     div.margin-top-20.margin-bottom-10
                                         span
-                                            b OpenOdds:
+                                            b OpenOdds:&nbsp;
                                         span #{log.xbet.blob.openOdds.date} &nbsp; / &nbsp;
                                         span #{log.xbet.blob.openOdds.val}
                                     div.margin-top-20.margin-bottom-10
