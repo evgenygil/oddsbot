@@ -104,20 +104,20 @@ async function procceedLinks(linksUl) {
 
 }
 
-async function procceedLinksMerged(linksUl) {
-
-    let leagues = await Filter.find({type: 3}).select('value').exec(); // country/championship
-
-    let leaguesArr = await leagues.map(function (e) {
-        return e.value
-    });
-
-    const checker = value =>
-        !leaguesArr.some(element => value.includes(element));
-
-    return await linksUl.filter(checker);
-
-}
+// async function procceedLinksMerged(linksUl) {
+//
+//     let leagues = await Filter.find({type: 3}).select('value').exec(); // country/championship
+//
+//     let leaguesArr = await leagues.map(function (e) {
+//         return e.value
+//     });
+//
+//     const checker = value =>
+//         !leaguesArr.some(element => value.includes(element));
+//
+//     return await linksUl.filter(checker);
+//
+// }
 
 
 function getMatches($) {
