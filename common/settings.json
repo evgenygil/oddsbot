@@ -2,11 +2,11 @@
   "min_duration": 9,
   "max_duration": 181,
   "tg_panic_time": 120,
-  "pup_timeout": 80000,
+  "pup_timeout": 30000,
   "match_list_load": 2000,
   "timezone_load": 2000,
-  "sleep_after_loop": 30000,
-  "sleep_after_match": 2000,
   "bets_interval": 400,
-  "bets_interal": 400
+  "bets_interal": 400,
+  "sleep_after_loop": 30000,
+  "sleep_after_match": 2000
 }

@@ -69,14 +69,14 @@ db.on('error', function (err) {
 
         // await oldlinks.push(link.href);
 
-        timeout(settings.sleep_after_match);
+        await timeout(settings.sleep_after_match);
 
 
     });
 
     // await helpers.writeFile('data.odb', oldlinks);
 
-    timeout(settings.sleep_after_loop);
+    await timeout(settings.sleep_after_loop);
     await process.exit();
 
 })();
