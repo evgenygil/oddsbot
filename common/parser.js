@@ -104,30 +104,13 @@ async function procceedLinks(linksUl) {
 
 }
 
-// async function procceedLinksMerged(linksUl) {
-//
-//     let leagues = await Filter.find({type: 3}).select('value').exec(); // country/championship
-//
-//     let leaguesArr = await leagues.map(function (e) {
-//         return e.value
-//     });
-//
-//     const checker = value =>
-//         !leaguesArr.some(element => value.includes(element));
-//
-//     return await linksUl.filter(checker);
-//
-// }
-
-
 function getMatches($) {
     return new Promise(function (resolve, reject) {
 
         if ($) {
 
             let matches = [];
-            let now = moment().add(config.timeCorrect, 'hours');
-
+            let now = moment();
 
             $('#table-matches').find('td.name.table-participant > a').each((index, element) => {
                 let href = element.attribs.href;

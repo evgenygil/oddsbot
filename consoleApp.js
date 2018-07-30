@@ -22,52 +22,15 @@ db.on('error', function (err) {
     console.log(err);
 });
 
-// (async () => {
-//
-//     logger.info('Start working...');
-//
-//     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
-//
-//     logger.info('Total matches to parse: ' + matches.length);
-//     console.log('Total matches to parse: ' + matches.length);
-//
-//     let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
-//     let oldMatches = await matchesFile.split(',');
-//
-//     await helpers.asyncForEach(matches, async (link) => {
-//         let match = await parser.parseMatch(config.baseUrl + link, 'json').catch((e) => logger.error('parseMatch error: ', e.stack));
-//
-//         if (match !== undefined && match !== null) {
-//
-//             let entMatch = await proceedMatch(match);
-//
-//             if (entMatch !== undefined) {
-//                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-//                 if ((oldMatches.length > 0) && (oldMatches.indexOf(link) < 0)) {
-//                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
-//                 }
-//             }
-//         }
-//
-//         timeout(3000);
-//     });
-//
-//     await helpers.writeFile('data.odb', matches);
-//
-//
-// })();
-
 (async () => {
-
-    // await Match.collection.drop();
 
     // let oldlinks = await [];
 
-    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Start working...');
+    await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
-    await console.log(moment().add(config.timeCorrect, 'hours').format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
+    await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
 
     // let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
     // let oldMatches = await matchesFile.split(',');
@@ -80,16 +43,20 @@ db.on('error', function (err) {
             let entMatch = await proceedMatch(match);
 
             if (entMatch !== undefined) {
+
+                let ignoreTg = await Match.find({archive: true}).exec();
+                let ignoreList = await ignoreTg.map(itm => itm.link);
+
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-                // if ((oldMatches.length > 0) && (oldMatches.indexOf(link.href) < 0)) {
+                if ((ignoreList.length > 0) && (ignoreList.indexOf(link.href) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
-                // }
+                }
             }
         }
 
-        await oldlinks.push(link.href);
+        // await oldlinks.push(link.href);
 
-        timeout(3000);
+        timeout(2000);
 
 
     });
@@ -156,7 +123,6 @@ async function proceedMatch(match) {
 }
 
 async function saveToLog(entity) {
-
     let logEntity = await new Match();
     logEntity.title = await entity.title;
     logEntity.league = await entity.league;
@@ -171,8 +137,8 @@ async function saveToLog(entity) {
             return (err)
         } else {
             logger.info(logEntity.title + ' saved.');
+            console.log(logEntity.title + ' saved.');
             return true;
         }
     });
-
 }
