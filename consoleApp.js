@@ -116,6 +116,8 @@ async function proceedMatch(match) {
                 match.pinnacle.delta = Math.round(delta_pin * 100) / 100;
                 match.xbet.delta = Math.round(delta_xbet * 100) / 100;
                 match.marathonbet.delta = Math.round(delta_mar * 100) / 100;
+                console.log(match.title + ' is interested - adding...');
+
                 resolve(match);
             } else {
                 logger.info(match.title + ' is not interesting match');
