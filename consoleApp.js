@@ -51,10 +51,10 @@ db.on('error', function (err) {
 
                 console.log(ignoreList);
                 console.log('Link href = ' + link.href);
-                console.log(ignoreList.indexOf(link.href));
+                console.log(ignoreList.indexOf(config.baseUrl + link.href));
 
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-                if ((ignoreList.length > 0) && (ignoreList.indexOf(link.href) < 0)) {
+                if ((ignoreList.length > 0) && (ignoreList.indexOf(config.baseUrl + link.href) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
                 }
             }
