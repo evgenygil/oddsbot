@@ -2,3 +2,40 @@ extends ../layout
 
 block content
     h2= title
+    form(method='POST', action='/settings/edit')
+        div.row
+            div.panel-body
+                div.col-lg-3
+                    div.form-group-sm
+                        h3 Match searching intervals
+                        div.row
+                            div.col-lg-6
+                                label Min duration
+                                    span.hint (minutes):
+                                input.form-control(type='text', name='min_duration', value=settings.min_duration)
+                            div.col-lg-6
+                                label Max duration
+                                    span.hint (minutes):
+                                input.form-control(type='text', name='max_duration', value=settings.max_duration)
+                    hr
+                    div.form-group-sm
+                        h3 Parser waitFor intervals
+                        div.form-group-sm
+                            label Puppeteer timeout
+                                span.hint (milliseconds):
+                            input.form-control(type='text', name='pup_timeout', value=settings.pup_timeout)
+                        div.form-group-sm
+                            label Matches list load
+                                span.hint (milliseconds):
+                            input.form-control(type='text', name='match_list_load', value=settings.match_list_load)
+                        div.form-group-sm
+                            label Timezone load
+                                span.hint (milliseconds):
+                            input.form-control(type='text', name='timezone_load', value=settings.timezone_load)
+                        div.form-group-sm
+                            label Bet's interval
+                                span.hint (milliseconds):
+                            input.form-control(type='text', name='bets_interal', value=settings.bets_interval)
+                    br
+                    input.btn.btn-primary(type='submit', value='Save')
+            div.col-lg-9

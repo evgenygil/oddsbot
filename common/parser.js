@@ -7,11 +7,12 @@ const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
 
 let Filter = require('../models/filter');
+let settings = require('./settings');
 
 async function parseMatches() {
 
     const browser = await puppeteer.launch({
-        timeout: 80000,
+        timeout: settings.pup_timeout,
         args: config.pupArgs
     });
 
@@ -21,9 +22,9 @@ async function parseMatches() {
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
     await page.waitForSelector('#table-matches');
     await page.click('a[id="user-header-timezone-expander"]').catch((e) => console.log(e.stack));
-    await page.waitFor(2000);
+    await page.waitFor(settings.match_list_load);
     await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
-    await page.waitFor(2000);
+    await page.waitFor(settings.timezone_load);
 
     let content = await page.evaluate(() => document.body.innerHTML);
 
@@ -42,7 +43,7 @@ async function parseMatches() {
 async function parseMatch(matchLink, type = 'json', time) {
 
     const browser = await puppeteer.launch({
-        timeout: 80000,
+        timeout: settings.pup_timeout,
         args: config.pupArgs
     });
     const page = await browser.newPage();
@@ -68,13 +69,13 @@ async function parseMatch(matchLink, type = 'json', time) {
 
         if (match.marathonbet.hint) {
             await page.hover('[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log('marathonbet hint empty'));
-            await page.waitFor(600);
+            await page.waitFor(200 + settings.bets_interval);
             let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
         if (match.xbet.hint) {
             await page.hover('[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log('xbet a hint empty'));
-            await page.waitFor(1000);
+            await page.waitFor(200 + (settings.bets_interval * 2));
             let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
@@ -119,7 +120,7 @@ function getMatches($) {
                 if (href.includes('/soccer/') && time.includes(':')) {
                     let timeMoment = moment((time + ':00'), 'HH:mm:ss a');
                     let duration = timeMoment.diff(now, 'minutes');
-                    if (duration > (9) && duration < (181)) {
+                    if (duration > (settings.min_duration) && duration < (settings.max_duration)) {
                         matches.push({href: href, time: time});
                     }
                 }
