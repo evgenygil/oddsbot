@@ -8,6 +8,7 @@ const helpers = require('./common/helpers');
 const telegram = require('telegram-bot-api');
 const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
+let settings = require('./common/settings');
 
 let Match = require('./models/match');
 
@@ -27,7 +28,7 @@ db.on('error', function (err) {
     // let oldlinks = await [];
     await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
 
-    await Match.update({date: {$lt: moment().format('DD.MM.YYYY HH:mm')}}, {archive: true}, {multi: true});
+    await Match.update({date: {$lt: moment().add(settings.min_duration, 'minutes').format('DD.MM.YYYY HH:mm')}}, {archive: true}, {multi: true});
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
