@@ -25,8 +25,9 @@ db.on('error', function (err) {
 (async () => {
 
     // let oldlinks = await [];
-
     await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
+
+    await Match.update({date: {$lt: moment().format('DD.MM.YYYY HH:mm')}}, {archive: true});
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
@@ -123,21 +124,21 @@ async function proceedMatch(match) {
 }
 
 async function saveToLog(entity) {
-    let logEntity = await new Match();
-    logEntity.title = await entity.title;
-    logEntity.league = await entity.league;
-    logEntity.link = await entity.link;
-    logEntity.date = await entity.date;
-    logEntity.pinnacle = await entity.pinnacle;
-    logEntity.marathonbet = await entity.marathonbet;
-    logEntity.xbet = await entity.xbet;
-    await logEntity.save(function (err) {
+    let matchEntity = await new Match();
+    matchEntity.title = await entity.title;
+    matchEntity.league = await entity.league;
+    matchEntity.link = await entity.link;
+    matchEntity.date = await entity.date;
+    matchEntity.pinnacle = await entity.pinnacle;
+    matchEntity.marathonbet = await entity.marathonbet;
+    matchEntity.xbet = await entity.xbet;
+    await matchEntity.save(function (err) {
         if (err) {
             logger.error('Error saving to DB, ', entity.title);
             return (err)
         } else {
-            logger.info(logEntity.title + ' saved.');
-            console.log(logEntity.title + ' saved.');
+            logger.info(matchEntity.title + ' saved.');
+            console.log(matchEntity.title + ' saved.');
             return true;
         }
     });
