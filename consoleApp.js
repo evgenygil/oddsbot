@@ -139,6 +139,7 @@ async function proceedMatch(match) {
     });
 }
 
+
 async function saveToLog(entity) {
     let matchEntity = await new Match();
     matchEntity.title = await entity.title;
