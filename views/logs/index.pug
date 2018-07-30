@@ -2,6 +2,7 @@ extends ../layout
 
 block content
     h2 Matches log
+        img#gears-loading(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 25px; margin-top: 0').margin-l-10
     div
         button#stop.btn.btn-sm.btn-danger Stop refresh every minute
     br
@@ -147,6 +148,7 @@ block content
             $("#stop").click(function () {
                 clearInterval(refresher);
                 refresher = null;
+                $('#gears-loading').fadeOut();
                 $(this).prop('disabled', true)
             });
         }

@@ -15,7 +15,7 @@ router.get('/all', function (req, res) {
 
 router.get('/all/page/:id', function (req, res) {
 
-    Match.paginate({archive: true}, {page: req.params.id, sort: 'updatedAt'}).then(function (result, err) {
+    Match.paginate({archive: true}, {page: req.params.id, sort: '-updatedAt'}).then(function (result, err) {
         if (!err) {
 
             let pagesarr = [];

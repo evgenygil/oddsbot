@@ -4,7 +4,7 @@ const parser = require('../common/parser');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: '<oddsbot>'});
+    res.redirect('/logs');
 });
 
 router.get('/loadallmatches', function (req, res, next) {
