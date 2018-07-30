@@ -157,7 +157,7 @@ async function saveToLog(entity) {
                     link: entity.link,
                     pinnacle: entity.pinnacle,
                     marathonbet: entity.marathonbet,
-                    xbet: entity.pinnacle
+                    xbet: entity.xbet
                 }}, function (err) {
                 if (err) {
                     console.log(err);
