@@ -1,7 +1,7 @@
 {
   "min_duration": 9,
   "max_duration": 181,
-  "tg_panic_time": 30,
+  "tg_panic_time": 120,
   "pup_timeout": 80000,
   "match_list_load": 2000,
   "timezone_load": 2000,

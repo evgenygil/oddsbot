@@ -23,6 +23,9 @@ db.on('error', function (err) {
     console.log(err);
 });
 
+
+// Fire!
+
 (async () => {
 
     // let oldlinks = await [];
@@ -31,12 +34,17 @@ db.on('error', function (err) {
 
     await Match.update({date: {$lt: moment().add(settings.min_duration, 'minutes').format('DD.MM.YYYY HH:mm')}}, {archive: true}, {multi: true});
 
+    // await Match.remove({archive: false}).exec();
+
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
     await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
 
     // let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
     // let oldMatches = await matchesFile.split(',');
+
+    let ignoreTg = await Match.find({archive: true}).exec();
+    let ignoreList = await ignoreTg.map(itm => itm.link);
 
     await helpers.asyncForEach(matches, async (link) => {
         let match = await parser.parseMatch(config.baseUrl + link.href, 'json', link.time).catch((e) => logger.error('parseMatch error: ', e.stack));
@@ -46,9 +54,6 @@ db.on('error', function (err) {
             let entMatch = await proceedMatch(match);
 
             if (entMatch !== undefined) {
-
-                let ignoreTg = await Match.find({archive: true}).exec();
-                let ignoreList = await ignoreTg.map(itm => itm.link);
 
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
 
@@ -81,7 +86,7 @@ async function sendToTelegram(match) {
     if (match) {
 
         let data =
-            match.date + ': *' + match.league + ' | ' + match.title + '* \n' +
+            'test: ' + match.date + ': *' + match.league + ' | ' + match.title + '* \n' +
             'Pinnacle: delta = ' + match.pinnacle.delta + ', odds: ' + (match.pinnacle.odds).join(', ') + '\n' +
             '1Xbet: delta = ' + match.xbet.delta + ', odds: ' + (match.xbet.odds).join(', ') + '\n' +
             'Marathonbet: delta = ' + match.marathonbet.delta + ', odds: ' + (match.marathonbet.odds).join(', ') + '\n';
@@ -93,9 +98,11 @@ async function sendToTelegram(match) {
         })
             .then(function () {
                 logger.info(match.title + ' sended to telegram');
+                console.log(match.title + ' sended to telegram');
             })
             .catch(function (err) {
                 logger.error('Send to TG API error ', err.stack);
+                console.log('Send to TG API error ');
             });
     }
 
@@ -143,7 +150,21 @@ async function saveToLog(entity) {
     matchEntity.xbet = await entity.xbet;
     await matchEntity.save(function (err) {
         if (err) {
-            logger.error('Error saving to DB, ', entity.title);
+            Match.findOneAndUpdate({title: entity.title, date: entity.data}, {$set: {
+                    league: entity.league,
+                    link: entity.link,
+                    pinnacle: entity.pinnacle,
+                    marathonbet: entity.marathonbet,
+                    xbet: entity.pinnacle,
+                }}, function (err) {
+                if (err) {
+                    console.log(err);
+                    logger.error('Error updating match' + err);
+                } else {
+                    console.log('Match ' + entity.title + ' updated.');
+                    logger.info('Match ' + entity.title + ' updated.');
+                }
+            });
             return (err)
         } else {
             logger.info(matchEntity.title + ' saved.');

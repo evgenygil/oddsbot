@@ -9,7 +9,6 @@
       "name": "ODDSBOT console",
       "script": "./consoleApp.js",
       "instances": "1",
-      "cron_restart": "*/10 * * * *",
     }
   ]
 }
