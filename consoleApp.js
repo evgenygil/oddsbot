@@ -53,7 +53,7 @@ db.on('error', function (err) {
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
 
                 let now = await moment();
-                let timeMoment = await moment((entMatch.date + ':00'), 'HH:mm:ss a');
+                let timeMoment = await moment((entMatch.date + ':00'), 'DD.MM.YYYY HH:mm:ss a');
                 let duration = await timeMoment.diff(now, 'minutes');
 
                 if ((ignoreList.length > 0) && (ignoreList.indexOf(config.baseUrl + link.href) < 0) && (duration < settings.tg_panic_time)) {

@@ -76,7 +76,16 @@ let Filter = require('./models/filter');
 
 (async () => {
     await console.log('Start');
-    let match = await parser.parseMatch('http://www.oddsportal.com/soccer/venezuela/primera-division/deportivo-la-guaira-zulia-nLAg12o2/', 'json', '22:30').catch((e) => logger.error('parseMatch error: ', e.stack));
+    let match = await parser.parseMatch('http://www.oddsportal.com/soccer/europe/euro-u19-women/germany-spain-hx0PuKw4/', 'json', '22:30').catch((e) => logger.error('parseMatch error: ', e.stack));
+
+    let now = await moment();
+    let timeMoment = await moment((match.date + ':00'), 'DD.MM.YYYY HH:mm:ss a');
+    let duration = await timeMoment.diff(now, 'minutes');
+
+    await console.log('Now = ' + now);
+    await console.log('entMatchdate = ' + match.date + ':00');
+    await console.log('timeMoment = ' + timeMoment);
+    await console.log('Duration = ' + duration);
 
     await console.log(match.date);
     await console.log('End');
