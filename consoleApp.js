@@ -151,12 +151,12 @@ async function saveToLog(entity) {
     matchEntity.xbet = await entity.xbet;
     await matchEntity.save(function (err) {
         if (err) {
-            Match.findOneAndUpdate({title: entity.title, date: entity.data}, {$set: {
+            Match.findOneAndUpdate({title: entity.title, date: entity.date}, {$set: {
                     league: entity.league,
                     link: entity.link,
                     pinnacle: entity.pinnacle,
                     marathonbet: entity.marathonbet,
-                    xbet: entity.pinnacle,
+                    xbet: entity.pinnacle
                 }}, function (err) {
                 if (err) {
                     console.log(err);
