@@ -30,6 +30,7 @@ block content
                     h4
                         a(href=log.link)
                             b #{log.title}
+                        button.btn.btn-danger.btn-sm.margin-l-20.delete-btn(style='margin-top: -4px', x-target=log._id) Delete
                     p Match starts: #{log.date}
                     p League: #{log.league}
                     //div.row

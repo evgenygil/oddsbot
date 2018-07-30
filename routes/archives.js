@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const moment = require('moment');
 
 let Match = require('../models/match');
 
@@ -34,6 +33,17 @@ router.get('/all/page/:id', function (req, res) {
             res.end('Error');
         }
     });
+});
+
+router.post('/delete/:id', function (req, res) {
+    Match.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            logger.error('Failed to delete from archive.');
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(200);
+        }
+    })
 });
 
 module.exports = router;

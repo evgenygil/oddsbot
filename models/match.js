@@ -6,7 +6,7 @@ let uniqueValidator = require('mongoose-unique-validator');
 
 mongoosePaginate.paginate.options = {
     lean: true,
-    limit: 5
+    limit: 20
 };
 
 // Match Schema
