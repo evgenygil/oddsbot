@@ -1,8 +1,10 @@
 {
   "min_duration": 9,
   "max_duration": 181,
+  "tg_panic_time": 30,
   "pup_timeout": 80000,
   "match_list_load": 2000,
   "timezone_load": 2000,
-  "bets_interval": 400
+  "bets_interval": 400,
+  "bets_interal": 400
 }

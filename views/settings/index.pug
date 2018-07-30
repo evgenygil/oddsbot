@@ -17,6 +17,11 @@ block content
                                 label Max duration
                                     span.hint (minutes):
                                 input.form-control(type='text', name='max_duration', value=settings.max_duration)
+                        div.row.margin-top-10
+                            div.col-lg-6
+                                label Telegram panic delay
+                                    span.hint (minutes):
+                                input.form-control(type='text', name='tg_panic_time', value=settings.tg_panic_time)
                     hr
                     div.form-group-sm
                         h3 Parser waitFor intervals

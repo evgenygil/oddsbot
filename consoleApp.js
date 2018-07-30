@@ -26,6 +26,7 @@ db.on('error', function (err) {
 (async () => {
 
     // let oldlinks = await [];
+
     await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
 
     await Match.update({date: {$lt: moment().add(settings.min_duration, 'minutes').format('DD.MM.YYYY HH:mm')}}, {archive: true}, {multi: true});
@@ -50,7 +51,12 @@ db.on('error', function (err) {
                 let ignoreList = await ignoreTg.map(itm => itm.link);
 
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
-                if ((ignoreList.length > 0) && (ignoreList.indexOf(config.baseUrl + link.href) < 0)) {
+
+                let now = await moment();
+                let timeMoment = await moment((entMatch.date + ':00'), 'HH:mm:ss a');
+                let duration = await timeMoment.diff(now, 'minutes');
+
+                if ((ignoreList.length > 0) && (ignoreList.indexOf(config.baseUrl + link.href) < 0) && (duration < settings.tg_panic_time)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
                 }
             }
