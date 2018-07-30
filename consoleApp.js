@@ -49,6 +49,10 @@ db.on('error', function (err) {
                 let ignoreTg = await Match.find({archive: true}).exec();
                 let ignoreList = await ignoreTg.map(itm => itm.link);
 
+                console.log(ignoreList);
+                console.log('Link href = ' + link.href);
+                console.log(ignoreList.indexOf(link.href));
+
                 await saveToLog(entMatch).catch((e) => logger.error('Saving to log error ', e.stack));
                 if ((ignoreList.length > 0) && (ignoreList.indexOf(link.href) < 0)) {
                     await sendToTelegram(entMatch).catch((e) => logger.error('Send to TG error ', e.stack));
