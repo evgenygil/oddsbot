@@ -59,6 +59,18 @@ $('.delete-btn').click(function (e) {
         });
     }
 });
+$('#delete-all-btn').click(function (e) {
+        $.ajax({
+            type: 'POST',
+            url: '/archives/delete-all',
+            success: function (data) {
+                window.location.reload(false);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+});
 
 function getMatches() {
 

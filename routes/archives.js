@@ -49,4 +49,15 @@ router.post('/delete/:id', function (req, res) {
     })
 });
 
+router.post('/delete-all/', function (req, res) {
+    Match.remove({archive: true}, function (err) {
+        if (err) {
+            logger.error('Failed to delete archive.');
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(200);
+        }
+    })
+});
+
 module.exports = router;
