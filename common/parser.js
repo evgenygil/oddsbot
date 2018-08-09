@@ -21,9 +21,9 @@ async function parseMatches() {
     await page.setViewport({width: 1440, height: 960});
     await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
     await page.waitForSelector('#table-matches');
-    await page.click('a[id="user-header-timezone-expander"]').catch((e) => console.log(e.stack));
+    await page.click('a[id="user-header-timezone-expander"]').catch((e) => logger.error(e.stack));
     await page.waitFor(settings.match_list_load);
-    await page.click('a[href="/set-timezone/54/"]').catch((e) => console.log(e.stack));
+    await page.click('a[href="/set-timezone/54/"]').catch((e) => logger.error(e.stack));
     await page.waitFor(settings.timezone_load);
 
     let content = await page.evaluate(() => document.body.innerHTML);
@@ -61,20 +61,20 @@ async function parseMatch(matchLink, type = 'json', time) {
     if (match.pinnacle.odds.length > 0) {
 
         if (match.pinnacle.hint) {
-            await page.hover('[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => console.log('pinnacle hint empty'));
+            await page.hover('[onmouseover="' + match.pinnacle.hint + '"]').catch((e) => logger.error('pinnacle hint empty'));
             await page.waitFor(200);
             let pinacle = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.pinnacle.blob = await getJsonFromHtml(pinacle).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
 
         if (match.marathonbet.hint) {
-            await page.hover('[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => console.log('marathonbet hint empty'));
+            await page.hover('[onmouseover="' + match.marathonbet.hint + '"]').catch((e) => logger.error('marathonbet hint empty'));
             await page.waitFor(200 + settings.bets_interval);
             let marathonbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.marathonbet.blob = await getJsonFromHtml(marathonbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
         }
         if (match.xbet.hint) {
-            await page.hover('[onmouseover="' + match.xbet.hint + '"]').catch((e) => console.log('xbet a hint empty'));
+            await page.hover('[onmouseover="' + match.xbet.hint + '"]').catch((e) => logger.error('xbet a hint empty'));
             await page.waitFor(200 + (settings.bets_interval * 2));
             let xbet = await page.evaluate(() => ('<div class="hint-block">' + document.querySelector('#tooltiptext').outerHTML + '</div>')).catch((e) => logger.error('evaluateHint Error ', e.stack));
             match.xbet.blob = await getJsonFromHtml(xbet).catch((e) => logger.error('getJsonFromHtml Error ', e.stack));
@@ -257,8 +257,8 @@ function getJsonFromHtml(data) {
                     blob.items.push(obj);
 
                 } catch (e) {
-                    console.log(e.stack);
-                    console.log('Error in obj parsing. Broken blob: ' + JSON.stringify(val));
+                    logger.error(e.stack);
+                    logger.error('Error in obj parsing. Broken blob: ' + JSON.stringify(val));
                 }
 
             }

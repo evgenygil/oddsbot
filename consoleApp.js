@@ -20,7 +20,7 @@ mongoose.connect(dbConfig.database, {useNewUrlParser: true});
 let db = mongoose.connection;
 
 db.on('error', function (err) {
-    console.log(err);
+    logger.error(err);
 });
 
 
@@ -30,7 +30,7 @@ db.on('error', function (err) {
 
     // let oldlinks = await [];
 
-    await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
+    await logger.info(moment().format('DD.MM.YYYY HH:mm') + ': Start working...');
 
     await Match.update({date: {$lt: moment().add(settings.min_duration, 'minutes').format('DD.MM.YYYY HH:mm')}}, {archive: true}, {multi: true});
 
@@ -38,7 +38,7 @@ db.on('error', function (err) {
 
     let matches = await parser.parseMatches().catch((e) => logger.error('parseMatches error: ', e.stack));
 
-    await console.log(moment().format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
+    await logger.info(moment().format('DD.MM.YYYY HH:mm') + ': Total matches to parse: ' + matches.length);
 
     // let matchesFile = await helpers.readFile('data.odb').catch((e) => logger.error('readFile error: ', e.stack));
     // let oldMatches = await matchesFile.split(',');
@@ -99,11 +99,9 @@ async function sendToTelegram(match) {
         })
             .then(function () {
                 logger.info(match.title + ' sended to telegram');
-                console.log(match.title + ' sended to telegram');
             })
             .catch(function (err) {
                 logger.error('Send to TG API error ', err.stack);
-                console.log('Send to TG API error ');
             });
     }
 
@@ -124,12 +122,10 @@ async function proceedMatch(match) {
                 match.pinnacle.delta = Math.round(delta_pin * 100) / 100;
                 match.xbet.delta = Math.round(delta_xbet * 100) / 100;
                 match.marathonbet.delta = Math.round(delta_mar * 100) / 100;
-                console.log(match.title + ' is interested - adding...');
-
+                logger.info(match.title + ' is interested - adding...');
                 resolve(match);
             } else {
                 logger.info(match.title + ' is not interesting match');
-                console.log(match.title + ' is not interesting match');
                 reject(false);
             }
 
@@ -160,17 +156,14 @@ async function saveToLog(entity) {
                     xbet: entity.xbet
                 }}, function (err) {
                 if (err) {
-                    console.log(err);
                     logger.error('Error updating match' + err);
                 } else {
-                    console.log('Match ' + entity.title + ' updated.');
                     logger.info('Match ' + entity.title + ' updated.');
                 }
             });
             return (err)
         } else {
             logger.info(matchEntity.title + ' saved.');
-            console.log(matchEntity.title + ' saved.');
             return true;
         }
     });
