@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 let Match = require('../models/match');
 
@@ -14,7 +15,7 @@ router.get('/all', function (req, res) {
 
 router.get('/all/page/:id', function (req, res) {
 
-    Match.paginate({archive: true}, {page: req.params.id, sort: '-updatedAt'}).then(function (result, err) {
+    Match.paginate({archive: true}, {page: req.params.id}).then(function (result, err) {
         if (!err) {
 
             let pagesarr = [];
@@ -23,7 +24,9 @@ router.get('/all/page/:id', function (req, res) {
             }
 
             res.render('archive/index', {
-                logs: result.docs,
+                logs: result.docs.sort(function (left, right) {
+                    return moment(left.date).diff(moment(right.date))
+                }),
                 pagesarr: pagesarr,
                 page_id: req.params.id
             });

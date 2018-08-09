@@ -26,7 +26,7 @@ router.get('/all/page/:id', function (req, res) {
 
             res.render('logs/index', {
                 logs: result.docs.sort(function (left, right) {
-                    return moment(left.timeStamp).diff(moment(right.timeStamp))
+                    return moment(left.date).diff(moment(right.date))
                 }),
                 pagesarr: pagesarr,
                 page_id: req.params.id
