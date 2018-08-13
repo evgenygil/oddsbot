@@ -28,6 +28,7 @@
     "phantom": "^6.0.3",
     "pug": "2.0.0-beta11",
     "puppeteer": "^1.6.0",
+    "shelljs": "^0.8.2",
     "telegram-bot-api": "^1.2.1",
     "underscore": "^1.9.1"
   }
