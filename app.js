@@ -19,7 +19,9 @@ const monitorRouter = require('./routes/monitor');
 const logsRouter = require('./routes/logs');
 const archivesRouter = require('./routes/archives');
 const filtersRouter = require('./routes/filters');
+const calcFiltersRouter = require('./routes/calcfilters');
 const settingsRouter = require('./routes/settings');
+const calculatorRouter = require('./routes/calculator');
 
 let app = express();
 
@@ -67,7 +69,9 @@ app.use('/monitor', monitorRouter);
 app.use('/logs', logsRouter);
 app.use('/archives', archivesRouter);
 app.use('/filters', filtersRouter);
+app.use('/calcfilters', calcFiltersRouter);
 app.use('/settings', settingsRouter);
+app.use('/calculator', calculatorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

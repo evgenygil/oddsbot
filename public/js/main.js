@@ -28,6 +28,7 @@ function refreshMatches() {
     });
 }
 
+
 $('.archive-btn').click(function (e) {
     let target = $(e.target);
     if (target.attr('x-target').length > 0) {
@@ -42,6 +43,36 @@ $('.archive-btn').click(function (e) {
             }
         });
     }
+});
+
+$('#get-calc-data').click(function () {
+
+    $('#get-calc-data').prop('disabled', true);
+
+    $('#loading-img').fadeIn();
+
+    $.ajax({
+        type: 'GET',
+        url: '/calculator/getleagues',
+        success: function (data) {
+
+            let linksUl = '<ul style="list-style-type: decimal; font-size: 14px" id="leagues-list">';
+
+            data.forEach(function (item) {
+                linksUl += '<li>' + item.href + '</li>';
+            });
+
+            linksUl += '</ul>';
+
+            $('#calculator-list').html(linksUl);
+
+            $('#get-calc-data').prop('disabled', false);
+            $('#loading-img').fadeOut();
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 });
 
 $('.delete-btn').click(function (e) {

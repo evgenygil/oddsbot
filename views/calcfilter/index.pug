@@ -5,16 +5,14 @@ block content
 
     div.row
         div.col-lg-11
-            form(method='POST', action='/filters/add')
-                h2 Add filter for matches
+            form(method='POST', action='/calcfilters/add')
+                h2 Add filter for calculator
                 div.hint
                     | For "Country" and "Championship" use &ltcountry&gt and &ltchampionship&gt, for combined filer better to use with slashes for start and end like /&ltcountry&gt/&ltchampionship&gt/
                 div.col-sm-2
                     div.form-group-sm
                         label Type:
                         select.form-control(name='type')
-                            //option(value="1") Country
-                            //option(value="2") Championship
                             option(value="3") Country/Championship
                 div.col-sm-4
                     div.form-group-sm
@@ -41,12 +39,6 @@ block content
                         li.list-group-item
                             i.pull-right.strategy-date.hint #{filter.createdAt.toISOString().replace(/T/, ' ').replace(/\..+/, '')}
                             case parseInt(filter.type)
-                                //when 1
-                                //    span
-                                //      b Country
-                                //when 2
-                                //    span
-                                //      b Championship
                                 when 3
                                     span
                                       b Country/Championship
@@ -57,5 +49,5 @@ block content
                             span.margin-l-10 |
                                 b.margin-l-10.hint  #{filter.comment}
                             span.margin-l-10
-                                a.margin-l-10.btn.btn-sm.btn-danger(href='/filters/delete/' + filter._id) Delete
+                                a.margin-l-10.btn.btn-sm.btn-danger(href='/calcfilters/delete/' + filter._id) Delete
         div.col-lg-2
