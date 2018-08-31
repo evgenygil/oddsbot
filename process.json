@@ -3,12 +3,12 @@
     {
       "name": "ODDSBOT web",
       "script": "./bin/www",
-      "instances": "1",
+      "instances": "1"
     },
     {
       "name": "ODDSBOT console",
       "script": "./consoleApp.js",
-      "instances": "1",
+      "instances": "1"
     }
   ]
 }

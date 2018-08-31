@@ -1,6 +1,6 @@
 {
   "min_duration": 9,
-  "max_duration": 181,
+  "max_duration": 700,
   "tg_panic_time": 120,
   "pup_timeout": 30000,
   "match_list_load": 2000,
