@@ -7,6 +7,7 @@ const logger = require('logger').createLogger('./logs/oddswork.log');
 const moment = require('moment');
 
 let Filter = require('../models/filter');
+let CalcFilter = require('../models/calcfilter');
 let settings = require('./settings');
 
 async function parseMatches() {
@@ -39,6 +40,38 @@ async function parseMatches() {
     return filteredUl;
 
 }
+
+async function parseLeagues() {
+
+    const browser = await puppeteer.launch({
+        timeout: settings.pup_timeout,
+        args: config.pupArgs
+    });
+
+    const page = await browser.newPage();
+    await browser.userAgent(config.userAgent);
+    await page.setViewport({width: 1440, height: 960});
+    await page.goto(config.soccerUrl).catch((e) => logger.error('Puppeteeer goto Error ', e.stack));
+    await page.waitForSelector('#table-matches');
+    await page.click('a[id="user-header-timezone-expander"]').catch((e) => logger.error(e.stack));
+    await page.waitFor(settings.match_list_load);
+    await page.click('a[href="/set-timezone/54/"]').catch((e) => logger.error(e.stack));
+    await page.waitFor(settings.timezone_load);
+
+    let content = await page.evaluate(() => document.body.innerHTML);
+
+    let $ = await cheerio.load(content);
+
+    let calcLinks = await getLeagues($).catch((e) => logger.error('getLeagues Error ', e.stack));
+
+    let filteredUl = await procceedLinks(calcLinks, 'CalcFilter').catch((e) => logger.error('procceedLinks Error ', e.stack));
+
+    await browser.close();
+
+    return filteredUl;
+
+}
+
 
 async function parseMatch(matchLink, type = 'json', time) {
 
@@ -90,13 +123,21 @@ async function parseMatch(matchLink, type = 'json', time) {
     }
 }
 
-async function procceedLinks(linksUl) {
+async function procceedLinks(linksUl, type = 'Filter') {
 
-    let countryChamp = await Filter.find({type: 3}).select('value').exec(); // league
+    let countryChamp;
 
-    let countryChampArr = await countryChamp.map(function (e) {
-        return e.value
-    });
+    if (type === 'CalcFilter') {
+        countryChamp = await CalcFilter.find({type: 3}).select('value').exec(); // league
+    } else {
+        countryChamp = await Filter.find({type: 3}).select('value').exec(); // league
+    }
+
+    let countryChampArr = await countryChamp.map(e => e.value);
+
+    if (type === 'CalcFilter') {
+        linksUl = await linksUl.filter(e => ((e.href.split('/').length - 1) > 3));
+    }
 
     const checker = value =>
         !countryChampArr.some(element => value.href.includes(element));
@@ -104,6 +145,7 @@ async function procceedLinks(linksUl) {
     return await linksUl.filter(checker);
 
 }
+
 
 function getMatches($) {
     return new Promise(function (resolve, reject) {
@@ -133,6 +175,28 @@ function getMatches($) {
         }
     });
 }
+
+function getLeagues($) {
+    return new Promise(function (resolve, reject) {
+
+        if ($) {
+
+            let links = [];
+
+            $('#sports-menu').find('a').each((index, element) => {
+                if ((element.attribs.href).includes('soccer')) {
+                    links.push({href: element.attribs.href});
+                }
+            });
+
+            resolve(links)
+        }
+        else {
+            reject('error')
+        }
+    });
+}
+
 
 function getMatchData($, time) {
     return new Promise(function (resolve, reject) {
@@ -282,5 +346,6 @@ function getJsonFromHtml(data) {
 
 module.exports = {
     parseMatches,
+    parseLeagues,
     parseMatch,
 };

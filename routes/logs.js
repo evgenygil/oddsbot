@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 const logger = require('logger').createLogger('./logs/oddswork.log');
+const shell = require('shelljs');
 
 let Match = require('../models/match');
 
@@ -47,6 +48,13 @@ router.post('/disable/:id', function (req, res) {
             res.sendStatus(200);
         }
     })
+});
+
+router.get('/restartparser/:flag', function (req, res) {
+    if (req.params.flag === 'true') {
+        shell.exec('pm2 restart all');
+        res.sendStatus(200);
+    }
 });
 
 module.exports = router;

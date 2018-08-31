@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    h2 Calculator
+        button.btn.btn-primary.margin-l-20#get-calc-data(style='margin-top: -4px') Get
+        button.btn.btn-danger.margin-l-20#get-calc-data(style='margin-top: -4px', onclick='window.location.reload(false);') Stop
+
+    div#loading-img(style='display:none')
+        img(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 40px; margin-top: 10px')
+
+    div#calculator-list(style='list-style-type:decimal; margin-top: 15px')

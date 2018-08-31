@@ -4,7 +4,8 @@ block content
     h2 Matches log
         img#gears-loading(src='http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif', style='width: 25px; margin-top: 0').margin-l-10
     div
-        button#stop.btn.btn-sm.btn-danger Stop refresh every minute
+        button#stop.btn.btn-sm.btn-info Stop refresh every minute
+        button#restart.btn.btn-sm.btn-danger.pull-right Restart parser
     br
     div#content-tb.row
         div.col-lg-10
@@ -141,7 +142,7 @@ block content
                 refresh_interval = 60000;
 
             refresher = setInterval(function () {
-                $('#content-tb').load(document.URL +  ' #content-tb');
+                $('#content-tb').load(document.URL + ' #content-tb');
             }, refresh_interval);
 
 
@@ -150,5 +151,15 @@ block content
                 refresher = null;
                 $('#gears-loading').fadeOut();
                 $(this).prop('disabled', true)
+            });
+
+            $("#restart").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/logs/restartparser/true'
+                });
+                setTimeout(function () {
+                    window.location.reload(false);
+                }, 2000)
             });
         }
